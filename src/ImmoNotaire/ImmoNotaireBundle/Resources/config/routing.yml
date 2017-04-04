@@ -1,0 +1,58 @@
+immo_notaire_user:
+    resource: "@ImmoNotaireBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+
+immo_notaire_recherche:
+    path:      /recherche/notaire
+    defaults: { _controller: ImmoNotaireBundle:User:rechercheNotaire }
+
+immo_notaire_annonce:
+    path:     /annuaire/notaires/{id}/annonces
+    defaults:  {_controller: ImmoNotaireBundle:User:AnnonceNotaire }
+    
+immo_recherche_annonce_notaire:
+    path:     /annuaire/notaires/{id}/recherche/annonces
+    defaults:  {_controller: ImmoNotaireBundle:User:RechercheAnnonceNotaire }
+    
+    
+fiche_notaire:
+    path:     /annuaire/notaires/{id}/voir
+    defaults: {_controller: ImmoNotaireBundle:User:ficheNotaire }
+
+annuaire_notaire:
+    path:     /annuaire/notaires
+    defaults: {_controller: ImmoNotaireBundle:User:annuaire }
+
+
+immo_notaire_profil:
+    path:     /profil
+    defaults: { _controller: ImmoNotaireBundle:Profile:profile }
+
+immo_notaire_self_annonce_archive:
+    path:     /profil/annonces
+    defaults: { _controller: ImmoNotaireBundle:Default:selfAnnonceArchive }
+
+ 
+immo_notaire_changePassword:
+    path:     /changer-mot-de-passe/
+    defaults: { _controller: ImmoNotaireBundle:ChangePassword:changePassword }
+
+immo_notaire_update:
+    path:     /{annonce}/modifier
+    defaults: { _controller: ImmoNotaireBundle:Default:redirectUpdate }
+
+immo_notaire_delete:
+    path:    /supprimer
+    defaults: { _controller: ImmoNotaireBundle:Default:Delete}
+
+immo_notaire_archiver:
+    path:    /{annonce}/archiver
+    defaults: { _controller: ImmoNotaireBundle:Default:archiver}
+ 
+
+immo_notaire_restaurer:
+    path:    /{annonce}/restaurer
+    defaults: { _controller: ImmoNotaireBundle:Default:restaurer}
+    
+
+

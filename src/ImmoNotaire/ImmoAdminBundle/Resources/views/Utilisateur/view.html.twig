@@ -1,0 +1,168 @@
+{%extends 'baseAdmin.html.twig'%}
+{%block title%}Utilisateur détails{%endblock%}
+{%block js%}
+    <script type="text/javascript" src="{{asset('admin/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/forms/selects/select2.min.js')}}"></script>
+
+    <script type="text/javascript" src="{{asset('admin/js/core/app.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/pages/datatables_basic.js')}}"></script>
+{%endblock%}
+
+{%block header%}
+    <!-- Page header -->
+    <div class="page-header page-header-default">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Accueil</span> - Détails utilisateur</h4>
+            </div>
+        </div>
+
+        <div class="breadcrumb-line">
+            <ul class="breadcrumb">
+                <li><a href="{{path('immo_admin_homepage')}}"><i class="icon-home2 position-left"></i> Accueil</a></li>
+                <li><a href="{{path('immo_admin_utilisateur')}}">Liste des utilisateurs</a></li>
+                <li class="active">Détails utilisateur</li>
+            </ul>
+        </div>
+    </div>
+{%endblock%}
+
+{%block body%}
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">Détails utilisateurs</h5>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="collapse"></a></li>
+                    <li><a data-action="reload"></a></li>
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-offset-2 col-lg-8">
+                    <div class="panel-heading bg-blue-300">
+                        <h3><i class="fa fa-cog"></i> Details utilisateur {%if user.username is defined%}: {{user.username|capitalize}}{%endif%}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Pseudo</th>
+                                <td>{%if user.username is defined%}{{user.username}}{%endif%}</td>
+                            </tr>
+                            <tr>
+                                <th>Nom</th>
+                                <td>{%if user.name is defined%}{{user.name}}{%endif%}</td>
+                            </tr>
+                            <tr>
+                                <th>Prenom</th>
+                                <td>{{user.firstname}}</td>
+                            </tr>
+                            <tr>
+                                <th>Etude</th>
+                                <td>{%if user.etude is defined%}{{user.etude}} {%endif%}</td>
+                            </tr>
+                            <tr>
+                                <th>Ville</th>
+                                <td>{{user.ville}}</td>
+                            </tr>
+                            <tr>
+                                <th>Siège</th>
+                                <td>{{user.siege}}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Email</th>
+                                <td>{{user.email}}</td>
+                            </tr>
+                            <tr>
+                                <th>Statut</th>
+                                <td>
+                                    {%if user.enabled%}
+                                        <span class="label label-success">Activé</span>
+                                    {%else%}
+                                        <span class="label label-danger">Désactivé</span>
+                                    {%endif%}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Role</th>
+                                <td>
+                                    {%if user.roles.0=="ROLE_ADMIN"%}
+                                        <span class="label label-success">Admistrateur</span>
+                                    {%else%}
+                                        <span class="label label-success">Notaire</span>
+                                    {%endif%}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Telephone</th>
+                                <td>{{user.telephone}}</td>
+                            </tr>
+                            <tr>
+                                <th>Portable</th>
+                                <td>{{user.contact}}</td>
+                            </tr>
+                        </table>
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <a class="btn btn-info" href="{{path('immo_admin_utilisateur')}}"><i class="fa fa-arrow-circle-o-left"></i> Retour vers la liste</a>
+                            </div>
+                            <div class="col-lg-5">
+                                {%if user.premium%}
+                                    <a class=" btn bg-warning-800" title="retirer premium" href="{{path('remove_premium',{'id':user.id})}}">
+                                        <i class="fa fa-star-half"></i>
+                                    </a>
+                                {%else%}
+                                    <a class=" btn bg-warning" title="rendre premium" href="{{path('add_premium',{'id':user.id})}}">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                {%endif %}
+                                <a class=" btn bg-primary" href="{{path('edit_utilisateur',{'id':user.id})}}">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                {%if user.enabled%}
+                                    <a class="btn btn-danger" href="{{path('immo_admin_utilisateur_desactivate',{'id':user.id})}}" title='Desactiver utilisateur'>
+                                        <i class="fa fa-close"></i>
+                                    </a>
+                                {%else%}
+                                    <a href="{{path('immo_admin_utilisateur_activate',{'id':user.id})}}"  class="btn btn-primary" title='Activer utilisateur'>
+                                        <i class="fa fa-check"></i>
+                                    </a>
+                                {%endif%}
+                                {%if user.roles.0=="ROLE_ADMIN"%}
+                                    <a href="{{path('remove_role_admin',{'id':user.id})}}" class=" btn btn-success" title='Retirer le role Administrateur'>
+                                        <i class="fa fa-star-half" ></i>
+                                    </a>
+                                {%else%}
+                                    <a href="{{path('add_role_admin',{'id':user.id})}}" class=" btn btn-success" title='attribuer le role Administrateur'>
+                                        <i class="fa fa-star" ></i>
+                                    </a>
+                                {%endif%}
+                                <a class="btn btn-danger" title="Supprimer l'utilisateur" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-warning-400">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title" id="myModalLabel"><i class="fa fa-warning"></i> Avertissement</h2>
+                </div>
+                <div class="modal-body">
+                    <h2>Etes vous sûre de vouloir supprimer l'utilisateur {{user.username}} ?</h2>
+                </div>
+                <div class="modal-footer">
+                    <a href="{{path('delete_utilisateur',{'utilisateur':user.id})}}" type="button" class="btn btn-success"><i class="fa fa-check"></i> OUI</a>
+                    <button type="button" class="btn btn-default"  data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i> ANNULER</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock%}

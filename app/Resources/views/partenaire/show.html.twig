@@ -1,0 +1,101 @@
+{%extends 'baseAdmin.html.twig'%}
+{%block js%}
+    <script type="text/javascript" src="{{asset('admin/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/forms/selects/select2.min.js')}}"></script>
+
+    <script type="text/javascript" src="{{asset('admin/js/core/app.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/pages/datatables_basic.js')}}"></script>
+{%endblock%}
+
+{%block header%}
+    <!-- Page header -->
+    <div class="page-header page-header-default">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Accueil</span> - Listes des notifications</h4>
+            </div>
+        </div>
+
+        <div class="breadcrumb-line">
+            <ul class="breadcrumb">
+                <li><a href="{{path('immo_admin_homepage')}}"><i class="icon-home2 position-left"></i> Accueil</a></li>
+                <li><a href="{{path('list-partenaire')}}">Liste des partenaires</a></li>
+                <li class="active">Détails partenaire</li>
+            </ul>
+        </div>
+    </div>
+{%endblock%}
+{% block body %}
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">Détails partenaire</h5>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="collapse"></a></li>
+                    <li><a data-action="reload"></a></li>
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-offset-2 col-lg-8">
+                    <div class="panel-heading bg-blue-300">
+                        <h3><i class="fa fa-cog"></i> Details partenaire {%if partenaire.name is defined%}: {{partenaire.name|capitalize}}{%endif%}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Nom</th>
+                                <td>{%if partenaire.name is defined%}{{partenaire.name}}{%endif%}</td>
+                            </tr>
+                            <tr>
+                                <th>Domaine</th>
+                                <td>{{partenaire.domaine}}</td>
+                            </tr>
+                            <tr>
+                                <th>logo</th>
+                                <td><img class="thumbnail" src="{{asset('upload/logo/')}}{{partenaire.logo}}" width="50"/></td>
+                            </tr>
+                            <tr>
+                                <th>Date d'ajout</th>
+                                <td>
+                                    {{ partenaire.date.date|date('d-m-Y') }}
+                                </td>
+                            </tr>
+                            
+                        </table>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <a class="btn btn-info" href="{{path('partenaire_index')}}"><i class="fa fa-arrow-circle-o-left"></i> Retour vers la liste</a>
+                            </div>
+                            <div class="col-lg-4">
+                                <a class=" btn bg-primary" href="{{path('edit-partenaire',{'id':partenaire.id})}}">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a class="btn btn-danger" title="Supprimer le partenaire" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-warning-400">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title" id="myModalLabel"><i class="fa fa-warning"></i> Avertissement</h2>
+                </div>
+                <div class="modal-body">
+                    <h2>Etes vous sûre de vouloir supprimer le partenaire {{partenaire.name}} ?</h2>
+                </div>
+                <div class="modal-footer">
+                    <a href="{{path('delete_partenaire',{'partenaire':partenaire.id})}}" type="button" class="btn btn-success"><i class="fa fa-check"></i> OUI</a>
+                    <button type="button" class="btn btn-default"  data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i> ANNULER</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock%}

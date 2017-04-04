@@ -1,0 +1,70 @@
+<style>
+    #newsletter-container h3 {
+        font-size: 15px;
+        line-height: 46px;
+        color: #444b4c;
+        margin: 0;
+        float: left;
+    }
+
+   
+    #newsletter-container form {
+        float: right;
+    }
+
+    #newsletter-container input[type=text] {
+        height: 30px;
+        width: 200px;
+        vertical-align: top;
+        margin-right: 5px;
+        border: 1px solid #0581b5;
+        background: #FFFFFF;
+        line-height: 20px;
+       
+        color: #727b7c;
+    }
+    #newsletter-container{
+        background-image: url('{{asset('img/bg-immo-newsletter copy.png')}}');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+
+    input, select, textarea {
+        outline: 0;
+    }
+
+    #newsletter-container .btn {
+        padding: 12px 20px;
+        font-size: 17px;
+        line-height: 20px;
+    }
+
+    .btn-custom-3 {
+        color: #fff;
+        background-color: #575a59;
+        border-color: #5c5f5e;
+        -webkit-box-shadow: inset 0 1px 1px rgba(255,255,255,.4);
+        box-shadow: inset 0 1px 1px rgba(255,255,255,.4);
+    }
+
+    .btn-custom-3:hover {
+        color: #fff;
+        background-color: #84bb26;
+        border-color: #94CF2E;
+        -webkit-box-shadow: inset 0 1px 1px rgba(255,255,255,.4);
+        box-shadow: inset 0 1px 1px rgba(255,255,255,.4);
+    }
+
+
+    ::selection {
+        background-color: #7bae23;
+        color: #fff;
+    }
+</style>
+<div class="span4 bg-white" id="newsletter-container">
+    <h2 class="padding-left-5">Recevoir les newsletters</h2>
+    <form method="post" class="padding-right-10" id="register-newsletter" action="{{path('add_newsletter')}}">
+        <input type="text" name="newsletter" required="true" placeholder="Entrez votre addresse Email">
+        <input type="submit" class="btn btn-custom-3" value="VALIDER">
+    </form>
+</div>  

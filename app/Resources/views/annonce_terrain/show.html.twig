@@ -1,0 +1,190 @@
+{% extends 'base.html.twig' %}
+{%block title%}
+Modification d'annonce
+{%endblock%}
+{% block body %}
+    <div class="list-your-property-form">
+        <h2 class="page-header">Modifier votre annonce</h2>
+
+        <div class="content">
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="span4">
+                    <h2><b>1.</b> Informations générales</h2>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Titre
+                            <span class="form-required" title="This field is required.">*</span>
+                        </label>
+                        <span class="fg-red">{{form_errors(form.annonce.titre)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.annonce.titre)}}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Type de transaction
+                            <span class="form-required" title="This field is required.">*</span>
+                        </label>
+                        <span class="fg-red">{{form_errors(form.annonce.type_annonce)}}</span>
+                        <div class="controls">
+                            {{ form_widget(form.annonce.type_annonce) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Prix
+                            <span class="form-required" title="This field is required.">*</span>
+                        </label>
+                        <span class="fg-red">{{form_errors(form.annonce.prix)}}</span>
+                        <div class="controls">
+                            {{ form_widget(form.annonce.prix) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Modèle
+                            <span class="form-required" title="This field is required.">*</span>
+                        </label>
+                        <span class="fg-red">{{form_errors(form.type_terrain)}}</span>
+                        <div class="controls">
+                            {{ form_widget(form.type_terrain,{'placeholder':'choisissez genre de terrain'}) }}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="span4">
+                    <h2><b>2.</b> Details du bien</h2>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Superficie
+                            (m<sup>2</sup>)
+                            <span class="form-required" title="This field is required.">*</span>
+                        </label>
+                        <span class="fg-red">{{form_errors(form.superficie)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.superficie)}}
+                        </div>
+                    </div>
+                    <div class="property-type control-group">
+                        <label class="control-label">
+                            Ville
+                            <span class="form-required" title="This field is required.">*</span>
+                        </label>
+                        <span class="fg-red">{{form_errors(form.annonce.ville) }}</span>
+                        <div class="controls">
+                            {{form_widget(form.annonce.ville,{'placeholder':'Choisir une ville','attr':{'id':'area'}}) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Commune /Quartier
+                            <span class="form-required" title="This field is required.">*</span>
+                        </label>
+                        <span class="fg-red">{{form_errors(form.annonce.commune)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.annonce.commune)}}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Disponible à partir de
+                            <span class="form-required" title="This field is required.">*</span>
+                        </label>
+                        <span class="fg-red">{{form_errors(form.annonce.disponibilite)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.annonce.disponibilite)}}
+                        </div>
+                    </div>
+                </div>
+                <div class="span4">
+                    <h2><b>3.</b> Description du bien</h2>
+                    <div class="control-group">
+                        <label class="control-label">
+                            A propos du bien
+                            <span class="form-required" title="This field is required.">*</span>
+                        </label>
+                        <span class="fg-red">{{form_errors(form.annonce.description)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.annonce.description)}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+               <div class="span4">
+                    <h2><b>4.</b>Images</h2>
+                    <div >
+                        <label>Photo 1</label>
+                        {{ form_row(form.annonce.media.file) }}
+                    </div>
+                    <div class="photo2">
+                        <label>Photo 2</label>
+                        {{ form_row(form.annonce.media.file1) }}
+                    </div>
+                    <div class="photo3">
+                        <label>Photo 3</label>
+                        {{ form_row(form.annonce.media.file2) }}
+                    </div>
+                    <div class="photo4">
+                        <label>Photo 4</label>
+                        {{ form_row(form.annonce.media.file3) }}
+                    </div>
+                    <div class="photo5">
+                        <label>Photo 5</label>
+                        {{ form_row(form.annonce.media.file4) }}
+                    </div>
+                    <style>.photo2,.photo3,.photo4,.photo5{display:none;}</style>
+                </div>
+                <div class="span4">
+                    <h2><b>5.</b>Vos contacts</h2>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Téléphone portable
+                            <span class="form-required" title="This field is required.">*</span>
+                        </label>
+                        <span class="fg-red">{{form_errors(form.annonce.telMobile)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.annonce.telMobile)}}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Téléphone fixe
+                            <span class="form-required" title="This field is required.">*</span>
+                        </label>
+                        <span class="fg-red">  {{form_errors(form.annonce.telFixe)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.annonce.telFixe)}}
+                        </div>
+                    </div>
+                </div>
+                <div class="span4">
+                    <h2><b>6.</b>Sauvegarder / Publier</h2>
+                    <div class="control-group">
+                        {{form_widget(form.annonce.active)}}
+                        <label class="control-label">
+                            Voulez-vous publiez l'annonce ?
+                        </label>
+                    </div>
+                    <div class="control-group">
+                        {{form_widget(form.annonce.affiche_contact)}}
+                        <label class="control-label">
+                            Voulez vous affichez vos contacts ?
+                        </label>
+                    </div>
+                    <div class="control-group padding-top-20">
+                        <div class="form-group">
+                            <div class="padding-top-20">
+                                <input type="submit" value="Sauvegarder / Publier l'annonce" class="btn btn-danger btn-large">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+
+{% endblock %}

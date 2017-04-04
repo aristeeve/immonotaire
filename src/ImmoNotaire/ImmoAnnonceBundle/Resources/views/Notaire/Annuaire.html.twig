@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{%block title%}
+    Annuaire des notaires
+{%endblock%}
+
+{% block body %}
+    <div class="wrapper" style="margin-top: 15px;">
+        <div class="row">
+            {%include 'searchNotaire.html.twig'%}
+            <div class="content span6 padding-10">
+                <h2 class="page-header">Annuaire des notaires</h2>
+                <table id="example1" class="table table-bordered">
+                    <thead>
+                        <tr>
+
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Siège</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {%for notaire in notaires%}
+                            {%if notaire.admin==0%}
+                                <tr>
+                                    <td>{{notaire.name|capitalize}}</td>
+                                    <td>{{notaire.username|capitalize}}</td>
+                                    <td>{{notaire.ville|capitalize}}, {{notaire.siege|capitalize}}</td>
+                                    <td>
+                                        <a class="btn btn-info" href="{{path('fiche_notaire',{'id':notaire.id})}}">
+                                            <i class="fa fa-eye"></i> Consulter la fiche
+                                        </a>
+                                    </td>
+                                </tr>
+                            {%endif%}
+
+                        {%endfor%}
+
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class="pagination pagination-centered">
+                {# knp_pagination_render(page) #}
+            </div>
+        </div>
+    </div>
+{%endblock%}

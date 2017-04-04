@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{%block title%}
+    Mes archives immobilières
+{%endblock%}
+
+{% block body %}
+    <div class="wrapper" style="margin-top: 15px;">
+        <ul class="breadcrumb">
+            <li><a href="{{path('immo_annonce_homepage')}}">Accueil</a> <span class="divider">/</span></li>
+            <li><a href="{{path('immo_notaire_profil')}}">Compte</a> <span class="divider">/</span></li>
+            <li class="active">archive</li>
+        </ul>
+        <div class="row">
+            <div class="content bg-white padding-10">
+                <h2 class="page-header">Mes archives</h2>
+                <table id="example1" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>Etude</th>
+                            <th>Titre</th>
+                            <th>Immobiliés</th>
+                            <th>Localisation</th>
+                            <th>Date de publication</th>
+                            <th>Bail</th>
+                            <th colspan="">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {%for annonce in page%}
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                       
+                    {%endfor%}
+
+                    </tbody>
+                </table>
+                {%endif%}
+                </div>
+
+                <div class="pagination pagination-centered">
+
+
+                    {{ knp_pagination_render(page) }}
+
+
+                </div>
+            </div>
+        </div>
+        {%endblock%}

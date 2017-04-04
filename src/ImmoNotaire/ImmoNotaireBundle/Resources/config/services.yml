@@ -1,0 +1,23 @@
+services:
+    users.user_provider.email:
+        class: Users\UsersBundle\Security\EmailProvider
+        arguments: ["@fos_user.user_manager"]
+
+    utilisateur.form.profile:
+        class: ImmoNotaire\ImmoNotaireBundle\Form\ProfileType
+        tags:
+            - { name: form.type, alias: utilisateur_profile }
+
+    utilisateur.form.change.password:
+        class: ImmoNotaire\ImmoNotaireBundle\Form\ChangePasswordType
+        tags:
+            - { name: form.type, alias: utilisateur_change_password }
+    
+    ImmoNotaire_login_success_handler:
+            class:  ImmoNotaire\ImmoNotaireBundle\Redirection\LoginSuccessHandler
+            arguments:  ["@router", "@security.authorization_checker"]
+
+
+  
+    
+ 

@@ -1,0 +1,40 @@
+publicite:
+    resource: "@PubliciteBundle/Resources/config/routing.yml"
+    prefix:   /publicite
+
+galerie:
+    resource: "@GalerieBundle/Resources/config/routing.yml"
+    prefix:   /galerie
+
+newsletter:
+    resource: "@NewsletterBundle/Resources/config/routing.yml"
+    prefix:   /newsletter
+
+partenaire:
+    resource: "@PartenaireBundle/Resources/config/routing.yml"
+    prefix:   /partenaire
+
+notification:
+    resource: "@NotificationBundle/Resources/config/routing.yml"
+    prefix:   /notification
+
+immo_admin:
+    resource: "@ImmoAdminBundle/Resources/config/routing.yml"
+    prefix:   /administration
+
+immo_annonce:
+    resource: "@ImmoAnnonceBundle/Resources/config/routing.yml"
+    prefix:   /
+
+immo_notaire:
+    resource: "@ImmoNotaireBundle/Resources/config/routing.yml"
+    prefix:   /compte
+    
+
+    
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+

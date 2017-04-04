@@ -1,0 +1,41 @@
+<div class="span3 no-margin" style="float: right;">
+    <div class="property-filter" style="background-color: #777" >
+        <h3 class="fg-white" style="text-align: center;">Rechercher un notaire</h3>
+        <hr/>
+        <div class="content">
+            <form method="get" action="{{path('immo_notaire_recherche')}}" name="searchNotaire">
+                <div class="location control-group">
+                    <div class="controls">
+                        {{form_widget(form.nom,{'attr':{'placeholder':'Saisissez le nom'}})}}
+                    </div><!-- /.controls -->
+                </div><!-- /.control-group -->
+
+                <div class="location  control-group">
+                    <div class="controls">
+                        {{form_widget(form.prenom,{'attr':{'placeholder':'Saisissez le prenom'}})}}
+                    </div><!-- /.controls -->
+
+                </div><!-- /.control-group -->
+                <div class="location  control-group">
+                    <div class="controls">
+                        {{form_widget(form.ville,{'attr':{'placeholder':'Saisissez la ville'}})}}
+                    </div><!-- /.controls -->
+
+                </div>
+
+                <div class="form-actions">
+                    <input type="submit" value="Rechercher" class="btn btn-primary btn-large">
+                </div><!-- /.form-actions -->
+
+            </form>
+        </div><!-- /.content -->
+    </div><!-- /.property-filter -->
+    <div style="margin-top:15px;"> 
+        {%for pub in pubs%}
+            {%if pub.name == "search-sidebar"%}
+                {{pub.content|raw}}
+            {%endif%}
+        {%endfor%}
+    </div>
+</div><!-- /.span3 -->
+

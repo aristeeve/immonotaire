@@ -1,0 +1,24 @@
+annonce_local_index:
+    path:     /
+    defaults: { _controller: "ImmoAnnonceBundle:Annonce_local:index" }
+    methods:  GET
+
+annonce_local_show:
+    path:     /{id}/show
+    defaults: { _controller: "ImmoAnnonceBundle:Annonce_local:show" }
+    methods:  GET
+
+annonce_local_new:
+    path:     /new
+    defaults: { _controller: "ImmoAnnonceBundle:Annonce_local:new" }
+    methods:  [GET, POST]
+
+annonce_local_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ImmoAnnonceBundle:Annonce_local:edit" }
+    methods:  [GET, POST]
+
+annonce_local_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ImmoAnnonceBundle:Annonce_local:delete" }
+    methods:  DELETE

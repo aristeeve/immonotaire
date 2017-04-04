@@ -1,0 +1,99 @@
+{%extends 'baseAdmin.html.twig'%}
+{%block title%}Galerie{%endblock%}
+{%block js%}
+    <script type="text/javascript" src="{{asset('admin/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/forms/selects/select2.min.js')}}"></script>
+
+    <script type="text/javascript" src="{{asset('admin/js/core/app.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/pages/datatables_basic.js')}}"></script>
+{%endblock%}
+
+{%block header%}
+    <!-- Page header -->
+    <div class="page-header page-header-default">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Accueil</span> - Galerie photo</h4>
+            </div>
+        </div>
+
+        <div class="breadcrumb-line">
+            <ul class="breadcrumb">
+                <li><a href="{{path('immo_admin_homepage')}}"><i class="icon-home2 position-left"></i> Accueil</a></li>
+                <li class="active">Galerie photo</li>
+            </ul>
+        </div>
+    </div>
+{%endblock%}
+{%block body%}
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h6 class="panel-title">Galerie photo</h6>
+                    <div class="heading-elements">
+                        <span class="label bg-success heading-text">{{galerie|length}} photos</span>
+                        <ul class="icons-list">
+                            <li><a data-action="collapse"></a></li>
+                            <li><a data-action="reload"></a></li>
+                            <li><a data-action="close"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                        <div class="panel-body" style="height: 500px; overflow-y:scroll;">
+                    <div class="row">
+                        {%for photo in galerie%}
+                            <div class="col-lg-3">
+                                <a  href="#myGalerie{{loop.index}}" role="button" class="" data-toggle="modal" style="">
+                                    <img class="thumbnail" src="{{asset('upload/galerie/')}}{{photo.img}}" width="150" height="120"/>
+                                </a>
+                            </div>
+                            <div class="modal fade" id="myGalerie{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="">
+                                        <div class="modal-header">
+                                            <button type="button" class="close fg-white" data-dismiss="modal" aria-label="Close"><i class="icon-cancel-circle2"></i></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img class="thumbnail" src="{{asset('upload/galerie/')}}{{photo.img}}" width="550" height="370"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {%endfor%}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h6 class="panel-title">Ajouter une photo</h6>
+                    <div class="heading-elements">
+                        <ul class="icons-list">
+                            <li><a data-action="collapse"></a></li>
+                            <li><a data-action="reload"></a></li>
+                            <li><a data-action="close"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                {{ form_start(form) }}
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>Image</label>
+                        {{form_widget(form.img)}}
+                        <b class="text-danger">{{ form_errors(form.img) }}</b>
+                    </div>
+                    {{form_rest(form)}}
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-success"> <i class="icon-plus-circle2"></i> Ajouter </button>
+                    </div>
+                </div>
+                {{form_end(form)}}
+
+            </div>
+        </div>
+    </div>
+{%endblock%}

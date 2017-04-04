@@ -1,0 +1,695 @@
+<?php
+
+namespace ImmoNotaire\ImmoAnnonceBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+//use Cotisation\CotisationBundle\Validator\Constraints as CustomAssert;
+
+/**
+ * Annonce
+ *
+ * @ORM\Table(name="annonce")
+ * @ORM\Entity(repositoryClass="ImmoNotaire\ImmoAnnonceBundle\Repository\AnnonceRepository")
+ */
+class Annonce {
+
+    public function __construct() {
+        $this->creeLe = new \Datetime();
+        $this->supprimer= 0;
+        $this->vue = 0;
+        
+    }
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titre", type="string", length=255, nullable=false)
+     */
+    private $titre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ville", type="string", length=255, nullable=true)
+     */
+    private $ville;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="commune", type="string", length=255, nullable=true)
+     */
+    private $commune;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tel_mobile", type="string", length=255, nullable=true)
+     */
+    private $telMobile;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tel_fixe", type="string", length=255, nullable=true)
+     */
+    private $telFixe;
+
+    /**
+     * @var string
+
+     * @Assert\Type(
+     *     type="integer",
+     *     message="le prix doit être un nombre."
+     * )
+     * @ORM\Column(name="prix", type="string", length=255, nullable=true)
+     */
+    private $prix;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="disponibilite", type="string", length=255, nullable=true)
+     */
+    private $disponibilite;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="modifie_le", type="datetimetz", nullable= true)
+     */
+    private $modifieLe;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="active", type="boolean")
+     */
+    private $active;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="affiche_contact", type="boolean")
+     */
+    private $affiche_contact;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ImmoNotaire\ImmoNotaireBundle\Entity\User")
+     */
+    private $user;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="cree_le", type="datetimetz")
+     */
+    private $creeLe;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ImmoNotaire\ImmoAnnonceBundle\Entity\Type_annonce")
+     */
+    private $type_annonce;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ImmoNotaire\ImmoAnnonceBundle\Entity\Type_biens")
+     */
+    private $type_biens;
+
+    /**
+     * @ORM\OneToOne(targetEntity="ImmoNotaire\ImmoAnnonceBundle\Entity\Media",cascade={"persist","remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $media;
+    
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="supprimer", type="boolean", nullable=true)
+     */
+    private $supprimer;
+   
+    /**
+     * @var int
+     * 
+     *
+     * @ORM\Column(name="vue", type="string", length=255, nullable=true)
+     */
+    private $vue;
+    
+    
+            
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * Set titre
+     *
+     * @param string $titre
+     *
+     * @return Annonce
+     */
+    public function setTitre($titre) {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    /**
+     * Get titre
+     *
+     * @return string
+     */
+    public function getTitre() {
+        return $this->titre;
+    }
+
+    /**
+     * Set creeLe
+     *
+     * @param \DateTime $creeLe
+     *
+     * @return Annonce
+     */
+    public function setCreeLe($creeLe) {
+        $this->creeLe = $creeLe;
+
+        return $this;
+    }
+
+    /**
+     * Get creeLe
+     *
+     * @return \DateTime
+     */
+    public function getCreeLe() {
+        return $this->creeLe;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \ImmoNotaire\ImmoNotaireBundle\Entity\User $user
+     *
+     * @return Annonce
+     */
+    public function setUser(\ImmoNotaire\ImmoNotaireBundle\Entity\User $user = null) {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \ImmoNotaire\ImmoNotaireBundle\Entity\User
+     */
+    public function getUser() {
+        return $this->user;
+    }
+
+    /**
+     * Set typeAnnonce
+     *
+     * @param \ImmoNotaire\ImmoAnnonceBundle\Entity\Type_annonce $typeAnnonce
+     *
+     * @return Annonce
+     */
+    public function setTypeAnnonce(\ImmoNotaire\ImmoAnnonceBundle\Entity\Type_annonce $typeAnnonce = null) {
+        $this->type_annonce = $typeAnnonce;
+
+        return $this;
+    }
+
+    /**
+     * Get typeAnnonce
+     *
+     * @return \ImmoNotaire\ImmoAnnonceBundle\Entity\Type_annonce
+     */
+    public function getTypeAnnonce() {
+        return $this->type_annonce;
+    }
+
+    /**
+     * Set typeBiens
+     *
+     * @param \ImmoNotaire\ImmoAnnonceBundle\Entity\Type_biens $typeBiens
+     *
+     * @return Annonce
+     */
+    public function setTypeBiens(\ImmoNotaire\ImmoAnnonceBundle\Entity\Type_biens $typeBiens = null) {
+        $this->type_biens = $typeBiens;
+
+        return $this;
+    }
+
+    /**
+     * Get typeBiens
+     *
+     * @return \ImmoNotaire\ImmoAnnonceBundle\Entity\Type_biens
+     */
+    public function getTypeBiens() {
+        return $this->type_biens;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Annonce
+     */
+    public function setDescription($description) {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription() {
+        return $this->description;
+    }
+
+   
+
+    
+    /**
+     * Set commune
+     *
+     * @param string $commune
+     *
+     * @return Annonce
+     */
+    public function setCommune($commune) {
+        $this->commune = $commune;
+
+        return $this;
+    }
+
+    /**
+     * Get commune
+     *
+     * @return string
+     */
+    public function getCommune() {
+        return $this->commune;
+    }
+
+    /**
+     * Set telMobile
+     *
+     * @param string $telMobile
+     *
+     * @return Annonce
+     */
+    public function setTelMobile($telMobile) {
+        $this->telMobile = $telMobile;
+
+        return $this;
+    }
+
+    /**
+     * Get telMobile
+     *
+     * @return string
+     */
+    public function getTelMobile() {
+        return $this->telMobile;
+    }
+
+    /**
+     * Set telFixe
+     *
+     * @param string $telFixe
+     *
+     * @return Annonce
+     */
+    public function setTelFixe($telFixe) {
+        $this->telFixe = $telFixe;
+
+        return $this;
+    }
+
+    /**
+     * Get telFixe
+     *
+     * @return string
+     */
+    public function getTelFixe() {
+        return $this->telFixe;
+    }
+
+    /**
+     * Set prix
+     *
+     * @param string $prix
+     *
+     * @return Annonce
+     */
+    public function setPrix($prix) {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return string
+     */
+    public function getPrix() {
+        return $this->prix;
+    }
+
+    /**
+     * Set disponibilite
+     *
+     * @param string $disponibilite
+     *
+     * @return Annonce
+     */
+    public function setDisponibilite($disponibilite) {
+        $this->disponibilite = $disponibilite;
+
+        return $this;
+    }
+
+    /**
+     * Get disponibilite
+     *
+     * @return string
+     */
+    public function getDisponibilite() {
+        return $this->disponibilite;
+    }
+
+    /**
+     * Set modifieLe
+     *
+     * @param \DateTime $modifieLe
+     *
+     * @return Annonce
+     */
+    public function setModifieLe($modifieLe) {
+        $this->modifieLe = $modifieLe;
+
+        return $this;
+    }
+
+    /**
+     * Get modifieLe
+     *
+     * @return \DateTime
+     */
+    public function getModifieLe() {
+        return $this->modifieLe;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     *
+     * @return Annonce
+     */
+    public function setActive($active) {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean
+     */
+    public function getActive() {
+        return $this->active;
+    }
+
+    /**
+     * Set afficheContact
+     *
+     * @param boolean $afficheContact
+     *
+     * @return Annonce
+     */
+    public function setAfficheContact($afficheContact) {
+        $this->affiche_contact = $afficheContact;
+
+        return $this;
+    }
+
+    /**
+     * Get afficheContact
+     *
+     * @return boolean
+     */
+    public function getAfficheContact() {
+        return $this->affiche_contact;
+    }
+
+    /**
+     * Set media
+     *
+     * @param \ImmoNotaire\ImmoAnnonceBundle\Entity\Media $media
+     *
+     * @return Annonce
+     */
+    public function setMedia(\ImmoNotaire\ImmoAnnonceBundle\Entity\Media $media = null) {
+        $this->media = $media;
+
+        return $this;
+    }
+
+    /**
+     * Get media
+     *
+     * @return \ImmoNotaire\ImmoAnnonceBundle\Entity\Media
+     */
+    public function getMedia() {
+        return $this->media;
+    }
+
+
+    /**
+     * Set appart
+     *
+     * @param \ImmoNotaire\ImmoAnnonceBundle\Entity\Annonce_appart $appart
+     *
+     * @return Annonce
+     */
+    public function setAppart(\ImmoNotaire\ImmoAnnonceBundle\Entity\Annonce_appart $appart)
+    {
+        $this->appart = $appart;
+
+        return $this;
+    }
+
+    /**
+     * Get appart
+     *
+     * @return \ImmoNotaire\ImmoAnnonceBundle\Entity\Annonce_appart
+     */
+    public function getAppart()
+    {
+        return $this->appart;
+    }
+
+    /**
+     * Set local
+     *
+     * @param \ImmoNotaire\ImmoAnnonceBundle\Entity\Annonce_local $local
+     *
+     * @return Annonce
+     */
+    public function setLocal(\ImmoNotaire\ImmoAnnonceBundle\Entity\Annonce_local $local)
+    {
+        $this->local = $local;
+
+        return $this;
+    }
+
+    /**
+     * Get local
+     *
+     * @return \ImmoNotaire\ImmoAnnonceBundle\Entity\Annonce_local
+     */
+    public function getLocal()
+    {
+        return $this->local;
+    }
+
+    /**
+     * Set terrain
+     *
+     * @param \ImmoNotaire\ImmoAnnonceBundle\Entity\Annonce_terrain $terrain
+     *
+     * @return Annonce
+     */
+    public function setTerrain(\ImmoNotaire\ImmoAnnonceBundle\Entity\Annonce_terrain $terrain)
+    {
+        $this->terrain = $terrain;
+
+        return $this;
+    }
+
+    /**
+     * Get terrain
+     *
+     * @return \ImmoNotaire\ImmoAnnonceBundle\Entity\Annonce_terrain
+     */
+    public function getTerrain()
+    {
+        return $this->terrain;
+    }
+
+    /**
+     * Set maison
+     *
+     * @param \ImmoNotaire\ImmoAnnonceBundle\Entity\Annonce_maison $maison
+     *
+     * @return Annonce
+     */
+    public function setMaison(\ImmoNotaire\ImmoAnnonceBundle\Entity\Annonce_maison $maison)
+    {
+        $this->maison = $maison;
+
+        return $this;
+    }
+
+    /**
+     * Get maison
+     *
+     * @return \ImmoNotaire\ImmoAnnonceBundle\Entity\Annonce_maison
+     */
+    public function getMaison()
+    {
+        return $this->maison;
+    }
+
+    /**
+     * Set archiver
+     *
+     * @param boolean $archiver
+     *
+     * @return Annonce
+     */
+    public function setArchiver($archiver)
+    {
+        $this->archiver = $archiver;
+
+        return $this;
+    }
+
+    /**
+     * Get archiver
+     *
+     * @return boolean
+     */
+    public function getArchiver()
+    {
+        return $this->archiver;
+    }
+
+    /**
+     * Set supprimer
+     *
+     * @param boolean $supprimer
+     *
+     * @return Annonce
+     */
+    public function setSupprimer($supprimer)
+    {
+        $this->supprimer = $supprimer;
+
+        return $this;
+    }
+
+    /**
+     * Get supprimer
+     *
+     * @return boolean
+     */
+    public function getSupprimer()
+    {
+        return $this->supprimer;
+    }
+
+    /**
+     * Set vue
+     *
+     * @param string $vue
+     *
+     * @return Annonce
+     */
+    public function setVue($vue)
+    {
+        $this->vue = $vue;
+
+        return $this;
+    }
+
+    /**
+     * Get vue
+     *
+     * @return string
+     */
+    public function getVue()
+    {
+        return $this->vue;
+    }
+
+    /**
+     * Set ville
+     *
+     * @param string $ville
+     *
+     * @return Annonce
+     */
+    public function setVille($ville)
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * Get ville
+     *
+     * @return string
+     */
+    public function getVille()
+    {
+        return $this->ville;
+    }
+}

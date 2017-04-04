@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Annonce_apparts list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Superficie</th>
+                <th>Espace_habitable</th>
+                <th>Piece</th>
+                <th>Chambre</th>
+                <th>Salon</th>
+                <th>Salle_bain</th>
+                <th>Etage</th>
+                <th>Niveau_etage</th>
+                <th>Annee</th>
+                <th>Meuble</th>
+                <th>Place_parking</th>
+                <th>Interphone</th>
+                <th>Chauffe_eau</th>
+                <th>Balcon</th>
+                <th>Cour</th>
+                <th>Piscine</th>
+                <th>Jardin</th>
+                <th>Garage</th>
+                <th>Parking</th>
+                <th>Ascenseur</th>
+                <th>Gardiennage</th>
+                <th>Systeme_alarme</th>
+                <th>Bordure_route</th>
+                <th>Vue_lagune</th>
+                <th>Vue_mer</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for annonce_appart in annonce_apparts %}
+            <tr>
+                <td><a href="{{ path('annonce_appart_show', { 'id': annonce_appart.id }) }}">{{ annonce_appart.id }}</a></td>
+                <td>{{ annonce_appart.superficie }}</td>
+                <td>{{ annonce_appart.espacehabitable }}</td>
+                <td>{{ annonce_appart.piece }}</td>
+                <td>{{ annonce_appart.chambre }}</td>
+                <td>{{ annonce_appart.salon }}</td>
+                <td>{{ annonce_appart.sallebain }}</td>
+                <td>{{ annonce_appart.etage }}</td>
+                <td>{{ annonce_appart.niveauetage }}</td>
+                <td>{{ annonce_appart.annee }}</td>
+                <td>{{ annonce_appart.meuble }}</td>
+                <td>{{ annonce_appart.placeparking }}</td>
+                <td>{% if annonce_appart.interphone %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_appart.chauffeeau %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_appart.balcon %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_appart.cour %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_appart.piscine %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_appart.jardin %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_appart.garage %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_appart.parking %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_appart.ascenseur %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_appart.gardiennage %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_appart.systemealarme %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_appart.bordureroute %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_appart.vuelagune %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_appart.vuemer %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('annonce_appart_show', { 'id': annonce_appart.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('annonce_appart_edit', { 'id': annonce_appart.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('annonce_appart_new') }}">Create a new annonce_appart</a>
+        </li>
+    </ul>
+{% endblock %}

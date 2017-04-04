@@ -1,0 +1,173 @@
+{% extends 'base.html.twig' %}
+{%block title%}
+    Mes annonces immobilières
+{%endblock%}
+{% block body %}
+    <div class="wrapper" style="margin-top: 15px;">
+        <ul class="breadcrumb">
+            <li><a href="{{path('immo_annonce_homepage')}}">Accueil</a> <span class="divider">/</span></li>
+            <li><a href="{{path('immo_notaire_profil')}}">Compte</a> <span class="divider">/</span></li>
+            <li><a href="{{path('immo_notaire_profil')}}">Profil</a> <span class="divider">/</span></li>
+            <li class="active">annonce</li>
+        </ul>
+        {% for msg in app.session.flashBag.get('info') %}
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{ msg }}
+            </div>
+        {% endfor %}
+        <div class="row">
+            <div class="content bg-white padding-10">
+                <ul class="tabs nav nav-tabs" id="myTab"  style="border-left: 1px solid #ddd;">
+                    <li class=""><a href="#publication">Mes publications <span class="badge">{{annonces|length}}</span></a></li>
+                    <li><a href="#archive">Mes archives <span class="badge">{{archives|length}}</span></a></li>
+                </ul>
+                <div class="tab-content"  style="border: 1px solid #ddd;">
+
+                    <div class="tab-pane active" id="publication">
+                        {%if annonces is empty%}
+                            <h3 class="fg-grayLight"><i>Vous n'avez publié aucune annonce.</i></h3>
+                        {%else%}
+                            <table id="example1" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>N°</th>
+                                        <th>Image</th>
+                                        <th>Titre</th>
+                                        <th>Immobiliés</th>
+                                        <th>Localisation</th>
+                                        <th>Vues</th>
+                                        <th>Publié le</th>
+                                        <th>Bail</th>
+                                        <th colspan="3">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    {%for annonce in annonces%}
+                                        {%if annonce.typeannonce.nom =='Location'%}
+                                            <tr class="info ">
+                                            {%else%}   
+                                            <tr class=" warning">
+                                            {%endif%}
+
+                                            <td>{{loop.index}}</td>
+
+                                            <td>
+                                                {%if annonce.media.file is empty%}
+                                                    {%if annonce.media.file1 is empty%}
+                                                        {%if annonce.media.file2 is empty%}
+                                                            {%if annonce.media.file3 is empty%}
+                                                                {%if annonce.media.file4 is empty%}
+                                                                    <img src="{{asset('upload/image/default.png')}}" alt=""style="width: 75px;">
+
+                                                                {%endif%}
+                                                                <img src="{{asset('upload/image/')}}{{annonce.media.file4}}" alt=""style="width: 75px;">
+
+                                                            {%endif%}
+                                                            <img src="{{asset('upload/image/')}}{{annonce.media.file3}}" alt=""style="width: 75px;">
+
+                                                        {%endif%}
+                                                        <img src="{{asset('upload/image/')}}{{annonce.media.file2}}" alt=""style="width: 75px;">
+
+                                                    {%endif%}
+                                                    <img src="{{asset('upload/image/')}}{{annonce.media.file1}}" alt=""style="width: 75px;">
+                                                {%else%}
+                                                    <img src="{{asset('upload/image/')}}{{annonce.media.file}}" alt=""style="width: 75px;">
+                                                {%endif%}
+
+
+                                            </td>
+                                            <td>{{annonce.titre|capitalize}}</td>
+                                            <td>{%if annonce.typebiens is empty%}{%else%}{{annonce.typebiens.nom}}{%endif%}</td>
+                                            <td>{%if annonce.ville is empty%}{%else%}{{annonce.ville}}{%endif%}</td>
+                                            <td>{{annonce.vue}}</td>
+                                            <td>{{annonce.creele|date('d-m-Y')}}</td>
+                                            <td>{{annonce.typeannonce.nom}}</td>
+                                            <td><a class="btn btn-danger" title="Archiver l'annonce" href="{{path('immo_notaire_archiver',{'annonce':annonce.id})}}"><i class="fa fa-folder"></i></a></td>
+                                            <td><a class="btn btn-info " href="{{path('immo_notaire_update',{'annonce':annonce.id})}}"><i class="fa fa-edit"></i> Modifier</a></td>
+                                            <td><a class="btn btn-success" href="{{path('immo_annonce_detail',{'annonce':annonce.id})}}"><i class="fa fa-eye"></i> Consulter</a></td>
+                                        </tr>
+                                    {%endfor%}
+
+                                </tbody>
+                            </table>
+                        {%endif%}
+
+                    </div>
+                    <div class="tab-pane" id="archive">
+
+                        {%if archives is empty%}
+                            <h3 class="fg-grayLight"><i>Vous n'avez aucune archive.</i></h3>
+                        {%else%}
+                            <table id="example1" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>N°</th>
+                                        <th>Image</th>
+                                        <th>Titre</th>
+                                        <th>Immobiliés</th>
+                                        <th>Localisation</th>
+                                        <th>Publié le</th>
+                                        <th>Bail</th>
+                                        <th colspan="">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    {%for archive in archives%}
+                                        {%if archive.typeannonce.nom =='Location'%}
+                                            <tr class="info ">
+                                            {%else%}   
+                                            <tr class=" warning">
+                                            {%endif%}
+
+                                            <td>{{loop.index}}</td>
+
+                                            <td>
+                                                {%if archive.media%}
+                                                    <img class="" src="{{asset('upload/image/')}}{{archive.media.file}}" width="75">
+                                                {%endif%}
+                                            </td>
+                                            <td>{{archive.titre|capitalize}}</td>
+                                            <td>{%if archive.typebiens is empty%}{%else%}{{archive.typebiens.nom}}{%endif%}</td>
+                                            <td>{%if archive.ville is empty%}{%else%}{{archive.ville}}{%endif%}</td>
+                                            <td>{{archive.creele|date('d-m-Y')}}</td>
+                                            <td>{{archive.typeannonce.nom}}</td>
+                                            <td><a class="btn btn-danger sup" title="Déplacer dans la corbeille" data-toggle="modal" data-target="#myDelete" ><i class="fa fa-trash"></i> Supprimer <span style="display:none;">{{archive.id}}</span></a></td>
+                                            <td><a class="btn btn-info " href="{{path('immo_notaire_restaurer',{'annonce':archive.id})}}"><i class="fa fa-recycle"></i> Restaurer</a></td>
+                                        </tr>
+                                    <div class="modal fade" id="myDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h2 class="modal-title fg-red" id="myModalLabel"><i class="fa fa-warning"></i> Suppression annonce</h2>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p >
+                                                    <h3>Voulez vous supprimer définitivement cette annonce ? </h3>
+                                                    </p>
+                                                </div>
+                                                <form method="post" action="{{path('immo_notaire_delete')}}">
+                                                    <input class="annonceId" type="hidden" value="" name="name"/>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-success" type="submit"><i class="fa fa-trash"></i> OUI</button>
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"></i> NON</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {%endfor%}
+
+                                </tbody>
+                            </table>
+                        {%endif%}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock%}

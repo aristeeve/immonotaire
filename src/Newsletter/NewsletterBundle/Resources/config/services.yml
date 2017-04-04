@@ -1,0 +1,4 @@
+services:
+#    newsletter.example:
+#        class: Newsletter\NewsletterBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

@@ -1,0 +1,90 @@
+<div class="span3">
+    <div class="property-filter">
+        <h3 class="fg-white" style="text-align: center;">Recherchez-vous un bien ?</h3>
+        <hr/>
+        <div class="content">
+
+            <form method="get" action="{{path('immo_annonce_recherche')}}" name="search">
+                <div class="rent control-group">
+                    <div class="controls">
+                        {{form_widget(form.statut.0,{'attr':{'checked':'checked'}})}}
+                        <label class="" for="inputSale">
+                            A louer
+                        </label>
+                    </div><!-- /.controls -->
+                </div>
+                <div class="sale control-group">
+                    <div class="controls">
+                        {{form_widget(form.statut.1)}}
+                        <label class="" for="inputSale">
+                            A vendre
+                        </label>
+                    </div><!-- /.controls -->
+                </div>
+                <div class="location control-group">
+                    <div class="controls">
+                        {{form_widget(form.ville,{'attr':{'placeholder':'Saisissez une ville'}})}}
+                    </div><!-- /.controls -->
+                </div><!-- /.control-group -->
+
+                <div class="type control-group">
+                    <div class="controls">
+                        {{form_widget(form.type_biens,{'placeholder':'Sectionnez un type de bien'})}}
+                    </div><!-- /.controls -->
+                    <div class="vide"></div>
+                </div><!-- /.control-group -->
+                <div class="type control-group appart">
+
+                    <div class="controls">
+                        {{form_row(form.modeleAppart)}}
+                    </div><!-- /.controls -->
+                    <div class="vide"></div>
+                </div>
+                <div class="type control-group maison">
+
+                    <div class="controls">
+                        {{form_row(form.modeleMaison)}}
+                    </div><!-- /.controls -->
+                    <div class="vide"></div>
+                </div>
+                <div class="type control-group terrain">
+
+                    <div class="controls">
+                        {{form_row(form.modeleTerrain)}}
+                    </div><!-- /.controls -->
+                    <div class="vide"></div>
+                </div>
+                <div class="type control-group local">
+
+                    <div class="controls">
+                        {{form_row(form.modeleLocal)}}
+                    </div><!-- /.controls -->
+                    <div class="vide"></div>
+                </div>
+                <!-- /.control-group -->
+                <div class="baths piece control-group">
+                    <div class="controls">
+                        {{form_row(form.piece)}}
+                    </div><!-- /.controls -->
+                </div>
+                <div class="beds superficie control-group">
+                    <div class="controls">
+                        {{form_row(form.superficie)}}
+                    </div><!-- /.controls -->
+                </div>
+                <div class="prix control-group">
+                    <div class="controls">
+                        {{form_row(form.prix)}}
+                    </div><!-- /.controls -->
+                </div>
+
+                <div class="form-actions">
+                    <input type="submit" value="Rechercher" class="btn btn-primary btn-large">
+                </div><!-- /.form-actions -->
+
+            </form>
+        </div><!-- /.content -->
+    </div><!-- /.property-filter -->
+
+</div><!-- /.span3 -->
+

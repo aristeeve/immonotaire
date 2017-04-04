@@ -1,0 +1,128 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Annonce_appart</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ annonce_appart.id }}</td>
+            </tr>
+            <tr>
+                <th>Superficie</th>
+                <td>{{ annonce_appart.superficie }}</td>
+            </tr>
+            <tr>
+                <th>Espace_habitable</th>
+                <td>{{ annonce_appart.espacehabitable }}</td>
+            </tr>
+            <tr>
+                <th>Piece</th>
+                <td>{{ annonce_appart.piece }}</td>
+            </tr>
+            <tr>
+                <th>Chambre</th>
+                <td>{{ annonce_appart.chambre }}</td>
+            </tr>
+            <tr>
+                <th>Salon</th>
+                <td>{{ annonce_appart.salon }}</td>
+            </tr>
+            <tr>
+                <th>Salle_bain</th>
+                <td>{{ annonce_appart.sallebain }}</td>
+            </tr>
+            <tr>
+                <th>Etage</th>
+                <td>{{ annonce_appart.etage }}</td>
+            </tr>
+            <tr>
+                <th>Niveau_etage</th>
+                <td>{{ annonce_appart.niveauetage }}</td>
+            </tr>
+            <tr>
+                <th>Annee</th>
+                <td>{{ annonce_appart.annee }}</td>
+            </tr>
+            <tr>
+                <th>Meuble</th>
+                <td>{{ annonce_appart.meuble }}</td>
+            </tr>
+            <tr>
+                <th>Place_parking</th>
+                <td>{{ annonce_appart.placeparking }}</td>
+            </tr>
+            <tr>
+                <th>Interphone</th>
+                <td>{% if annonce_appart.interphone %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Chauffe_eau</th>
+                <td>{% if annonce_appart.chauffeeau %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Balcon</th>
+                <td>{% if annonce_appart.balcon %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Cour</th>
+                <td>{% if annonce_appart.cour %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Piscine</th>
+                <td>{% if annonce_appart.piscine %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Jardin</th>
+                <td>{% if annonce_appart.jardin %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Garage</th>
+                <td>{% if annonce_appart.garage %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Parking</th>
+                <td>{% if annonce_appart.parking %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Ascenseur</th>
+                <td>{% if annonce_appart.ascenseur %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Gardiennage</th>
+                <td>{% if annonce_appart.gardiennage %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Systeme_alarme</th>
+                <td>{% if annonce_appart.systemealarme %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Bordure_route</th>
+                <td>{% if annonce_appart.bordureroute %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Vue_lagune</th>
+                <td>{% if annonce_appart.vuelagune %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Vue_mer</th>
+                <td>{% if annonce_appart.vuemer %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('annonce_appart_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('annonce_appart_edit', { 'id': annonce_appart.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

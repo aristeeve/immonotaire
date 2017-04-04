@@ -1,0 +1,27 @@
+recherche_ville:
+     path:     /recherche-ville/{Region}
+     defaults: {_controller: ImmoAnnonceBundle:Ajax:rechercheVille }
+     options:
+         expose: true
+
+recherche_modele:
+     path:     /recherche-modele/{TypeBien}
+     defaults: {_controller: ImmoAnnonceBundle:Ajax:rechercheModele }
+     options:
+         expose: true
+
+liste-ville:
+    path:     /liste-ville
+    defaults: {_controller: ImmoAnnonceBundle:Ajax:listeVille }
+    options:
+         expose: true
+
+#{file}-{file1}-{file2}-{file3}-{file4}
+immo_upload:
+    path:    annonce/{media}
+    defaults: { _controller: ImmoAnnonceBundle:Ajax:UploadMedia }
+    options:
+         expose: true
+    
+    
+    

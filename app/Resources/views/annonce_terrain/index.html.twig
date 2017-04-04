@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Annonce_terrains list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Superficie</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for annonce_terrain in annonce_terrains %}
+            <tr>
+                <td><a href="{{ path('annonce_terrain_show', { 'id': annonce_terrain.id }) }}">{{ annonce_terrain.id }}</a></td>
+                <td>{{ annonce_terrain.superficie }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('annonce_terrain_show', { 'id': annonce_terrain.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('annonce_terrain_edit', { 'id': annonce_terrain.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('annonce_terrain_new') }}">Create a new annonce_terrain</a>
+        </li>
+    </ul>
+{% endblock %}

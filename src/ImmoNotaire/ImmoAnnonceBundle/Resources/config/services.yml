@@ -1,0 +1,4 @@
+services:
+     Immo_uploader:
+        class: ImmoNotaire\ImmoAnnonceBundle\Uploader\FileUploader
+        arguments: ['%image_annonce%']

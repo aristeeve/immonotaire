@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Annonce</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ annonce.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ annonce.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ annonce.description }}</td>
+            </tr>
+            <tr>
+                <th>Region</th>
+                <td>{{ annonce.region }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ annonce.ville }}</td>
+            </tr>
+            <tr>
+                <th>Commune</th>
+                <td>{{ annonce.commune }}</td>
+            </tr>
+            <tr>
+                <th>Telmobile</th>
+                <td>{{ annonce.telMobile }}</td>
+            </tr>
+            <tr>
+                <th>Telfixe</th>
+                <td>{{ annonce.telFixe }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ annonce.prix }}</td>
+            </tr>
+            <tr>
+                <th>Disponibilite</th>
+                <td>{{ annonce.disponibilite }}</td>
+            </tr>
+            <tr>
+                <th>Modifiele</th>
+                <td>{{ annonce.modifieLe }}</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>{% if annonce.active %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Affiche_contact</th>
+                <td>{% if annonce.affichecontact %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Creele</th>
+                <td>{{ annonce.creeLe }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('annonce_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('annonce_edit', { 'id': annonce.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

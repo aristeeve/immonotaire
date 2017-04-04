@@ -1,0 +1,291 @@
+{% extends 'base.html.twig' %}
+{%block title%}
+    Site officiel de l'Immobilier Notaire de Cote d'Ivoire
+{%endblock%}
+{% block body %}
+    <div class="slider-wrapper">
+        <div class="slider">
+            <div class="slider-inner">
+                <div class="row">
+                    <div class="span9">
+                        <div id="amazingslider-wrapper-1" style="display:block;position:relative;max-width:870px;padding-left:0px; padding-right:250px;margin:0px auto 0px;">
+                            <div id="amazingslider-1" style="display:block;position:relative;margin:0 auto;">
+                                <ul class="amazingslider-slides" style="display:none;">
+                                    {%if annonces%}
+                                        {%for annonce in annonces|slice(0, 14) %}
+                                            <li >
+                                                <a  href="{{path('immo_annonce_detail',{'annonce':annonce.id})}}" title="cliquez sur l'image">
+
+                                                    {%if annonce.media.file is empty%}
+                                                        {%if annonce.media.file1 is empty%}
+                                                            {%if annonce.media.file2 is empty%}
+                                                                {%if annonce.media.file3 is empty%}
+                                                                    {%if annonce.media.file4 is empty%}
+                                                                        <img src="{{asset('upload/image/default.png')}}" alt=""style="width: 630px; height: 350px">
+
+                                                                    {%endif%}
+                                                                    <img src="{{asset('upload/image/')}}{{annonce.media.file4}}" alt="{{annonce.titre|capitalize}} à {{annonce.ville}},{{annonce.commune}}" width="630" height="350" />
+
+                                                                {%endif%}
+
+                                                                <img src="{{asset('upload/image/')}}{{annonce.media.file3}}" alt="{{annonce.titre|capitalize}} à {{annonce.ville}},{{annonce.commune}}" width="630" height="350" />
+                                                            {%endif%}
+
+                                                            <img src="{{asset('upload/image/')}}{{annonce.media.file2}}" alt="{{annonce.titre|capitalize}} à {{annonce.ville}},{{annonce.commune}}" width="630" height="350" />
+
+                                                        {%endif%}
+
+                                                        <img src="{{asset('upload/image/')}}{{annonce.media.file1}}" alt="{{annonce.titre|capitalize}} à {{annonce.ville}},{{annonce.commune}}" width="630" height="350" />
+
+                                                    {%else%}
+
+                                                        <img src="{{asset('upload/image/')}}{{annonce.media.file}}" alt="{{annonce.titre|capitalize}} à {{annonce.ville}},{{annonce.commune}}" width="630" height="350" />
+
+                                                    {%endif%}
+
+
+
+                                                </a>
+                                            </li>
+                                        {%endfor%}
+                                    {%endif%}
+                                </ul>
+                                {%if annonces%}
+                                    <ul class="amazingslider-thumbnails" style="display:none;">
+
+                                        {%for annonce in annonces|slice(0, 14) %}
+                                            <li>
+                                                <a href="{{path('immo_annonce_detail',{'annonce':annonce.id})}}">
+
+                                                    {%if annonce.media.file is empty%}
+                                                        {%if annonce.media.file1 is empty%}
+                                                            {%if annonce.media.file2 is empty%}
+                                                                {%if annonce.media.file3 is empty%}
+                                                                    {%if annonce.media.file4 is empty%}
+                                                                        <img src="{{asset('upload/image/default.png')}}" alt=""style="width: 240px; height: 114px">
+
+                                                                    {%endif%}
+                                                                    <img src="{{asset('upload/image/')}}{{annonce.media.file4}}" alt="{{annonce.titre|capitalize}} à {{annonce.ville}},{{annonce.commune}}" width="240" height="114" />
+
+                                                                {%endif%}
+
+                                                                <img src="{{asset('upload/image/')}}{{annonce.media.file3}}" alt="{{annonce.titre|capitalize}} à {{annonce.ville}},{{annonce.commune}}" width="240" height="114" />
+                                                            {%endif%}
+
+                                                            <img src="{{asset('upload/image/')}}{{annonce.media.file2}}" alt="{{annonce.titre|capitalize}} à {{annonce.ville}},{{annonce.commune}}" width="240" height="114" />
+
+                                                        {%endif%}
+
+                                                        <img src="{{asset('upload/image/')}}{{annonce.media.file1}}" alt="{{annonce.titre|capitalize}} à {{annonce.ville}},{{annonce.commune}}" width="240" height="114" />
+
+                                                    {%else%}
+
+                                                        <img src="{{asset('upload/image/')}}{{annonce.media.file}}" alt="{{annonce.titre|capitalize}} à {{annonce.ville}},{{annonce.commune}}" width="240" height="114" />
+
+                                                    {%endif%}
+
+
+                                                </a>
+                                            </li>
+                                        {%endfor%}
+                                    </ul>
+                                {%endif%}
+                            </div>
+                        </div>
+                    </div><!-- /.images -->
+                    {%include 'search.html.twig'%}
+
+
+                </div><!-- /.row -->
+                <div class="row">
+                    <div class="span9">
+                        <h1 class="page-header">Annonces récentes</h1>
+                        <div class="properties-grid">
+                            <div class="row">
+                                {%for recente in recentes%}
+                                    <div class="property span3">
+                                        <div class="image">
+                                            <div class="content">
+                                                <a href="{{path('immo_annonce_detail',{'annonce':recente.id})}}"></a>
+
+                                                {%if recente.media.file is empty%}
+                                                    {%if recente.media.file1 is empty%}
+                                                        {%if recente.media.file2 is empty%}
+                                                            {%if recente.media.file3 is empty%}
+                                                                {%if recente.media.file4 is empty%}
+                                                                    <img src="{{asset('upload/image/default.png')}}" alt=""  height="200" style="height: 200px;">
+
+                                                                {%endif%}
+                                                                <img src="{{asset('upload/image/')}}{{recente.media.file4}}" alt="" height="200" style="height: 200px;" />
+
+                                                            {%endif%}
+
+                                                            <img src="{{asset('upload/image/')}}{{recente.media.file3}}" alt="" height="200" style="height: 200px;" />
+                                                        {%endif%}
+
+                                                        <img src="{{asset('upload/image/')}}{{recente.media.file2}}" alt=""  height="200" style="height: 200px;" />
+
+                                                    {%endif%}
+
+                                                    <img src="{{asset('upload/image/')}}{{recente.media.file1}}" alt="" height="200" style="height: 200px;"/>
+
+                                                {%else%}
+
+                                                    <img src="{{asset('upload/image/')}}{{recente.media.file}}" alt=""  height="200" style="height: 200px;"/>
+
+                                                {%endif%}
+
+                                            </div><!-- /.content -->
+
+                                            <div class="price text-center">{{recente.prix|abs|number_format(0,'','.')}} Fcfa</div><!-- /.price -->
+                                            <!-- /.reduced <div class="reduced">Reduced </div>-->
+                                        </div><!-- /.image -->
+
+                                        <div class="title">
+                                            <h2><a href="{{path('immo_annonce_detail',{'annonce':recente.id})}}">{{recente.titre}}</a></h2>
+                                        </div><!-- /.title -->
+
+                                        <div class="location">{{recente.ville}}</div><!-- /.location -->
+                                    </div><!-- /.property -->
+                                {%endfor%}
+                            </div><!-- /.row -->
+                        </div><!-- /.properties-grid -->
+                    </div>
+                    <div class="sidebar span3">
+                        <div class="widget our-agents">
+                            <div class="title">
+                                <h2>Annuaire des notaires</h2>
+                            </div><!-- /.title -->
+
+                            <a href="{{path('annuaire_notaire')}}">
+                                <div class="agent text-center">
+                                    <div class="">
+                                        <img src="{{asset("img/notaire.jpg")}}" alt="">
+                                    </div><!-- /.image -->
+                                    <a class="btn btn-info" href="{{path('annuaire_notaire')}}" >Annuaire des notaires</a><!-- /.name -->
+                                </div><!-- /.agent -->
+                            </a>
+
+                        </div><!-- /.our-agents -->
+                        <div class="hidden-tablet">
+                            <div class="widget properties last">
+                                <div>
+                                    {%for pub in pubs%}
+                                        {%if pub.name == "home-sidebar"%}
+                                            {{pub.content|raw}}
+                                        {%endif%}
+                                    {%endfor%}
+                                </div>
+                            </div><!-- /.properties -->
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel">
+                    <h2 class="page-header">Les plus vues</h2>
+
+                    <div class="content">
+                        <a class="carousel-prev" href="detail.html">Previous</a>
+                        <a class="carousel-next" href="detail.html">Next</a>
+                        <ul>
+                            {%for vue in vues%}
+                                <li>
+                                    <div class="image">
+                                        <a href="{{path('immo_annonce_detail',{'annonce':vue.id})}}"></a>
+
+                                        {%if vue.media.file is empty%}
+                                            {%if vue.media.file1 is empty%}
+                                                {%if vue.media.file2 is empty%}
+                                                    {%if vue.media.file3 is empty%}
+                                                        {%if vue.media.file4 is empty%}
+                                                            <img src="{{asset('upload/image/default.png')}}" alt=""  height="200" style="width: 250px; height: 200px;">
+
+                                                        {%endif%}
+                                                        <img src="{{asset('upload/image/')}}{{vue.media.file4}}" alt="" height="200" style="width: 250px; height: 200px;" />
+
+                                                    {%endif%}
+
+                                                    <img src="{{asset('upload/image/')}}{{vue.media.file3}}" alt="" height="200" style="width: 250px; height: 200px;" />
+                                                {%endif%}
+
+                                                <img src="{{asset('upload/image/')}}{{vue.media.file2}}" alt=""  height="200" style="width: 250px; height: 200px;" />
+
+                                            {%endif%}
+
+                                            <img src="{{asset('upload/image/')}}{{vue.media.file1}}" alt="" height="200" style=" width: 250px; height: 200px;"/>
+
+                                        {%else%}
+
+                                            <img src="{{asset('upload/image/')}}{{vue.media.file}}" alt=""  height="200" style="width: 250px; height: 200px;"/>
+
+                                        {%endif%}
+
+                                    </div><!-- /.image -->
+                                    <div class="title">
+                                        <h3><a href="{{path('immo_annonce_detail',{'annonce':vue.id})}}">{{vue.titre|capitalize}}</a></h3>
+                                    </div><!-- /.title -->
+                                    <div class="location">{{vue.ville}}</div><!-- /.location-->
+                                    <div class="price">{{vue.prix|abs|number_format(0,'','.')}} Fcfa</div><!-- .price -->
+                                </li>
+                            {%endfor%}
+                        </ul>
+                    </div><!-- /.content -->
+                </div><!-- /.carousel -->        
+                <div class="features">
+                    <div class="row">
+                        <div class="span8">
+                            {%for pub in pubs%}
+                                {%if pub.name == "home-footer"%}
+                                    {{pub.content|raw}}
+                                {%endif%}
+                            {%endfor%}
+                        </div>
+                        {%include 'NewsletterBundle:Default:index.html.twig'%}
+                    </div>
+                </div><!-- /.features -->    
+            </div>
+        </div>
+        {% if app.session.flashBag.has('newsletter') %}
+            <a id="newletter" href="#myModal" role="button" class="btn" data-toggle="modal" style="display:none">Launch demo modal</a>
+            <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-body">
+                    {% for msg in app.session.flashBag.get('newsletter') %}
+                        <h4> {{ msg }}</h4>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+        {%endif%}
+
+        <div class="bottom-wrapper">
+            <div class="bottom container">
+                <div class="bottom-inner row">
+                    <div class="item span4">
+                        <div class="address decoration"></div>
+                        <h2><a>List your property</a></h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan dui ac nunc imperdiet rhoncus. Aenean vitae imperdiet lectus</p>
+                        <a href="#" class="btn btn-primary">Read more</a>
+                    </div><!-- /.item -->
+
+                    <div class="item span4">
+                        <div class="gps decoration"></div>
+                        <h2><a>Advertise rentals</a></h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan dui ac nunc imperdiet rhoncus. Aenean vitae imperdiet lectus</p>
+                        <a href="#" class="btn btn-primary">Read more</a>
+                    </div><!-- /.item -->
+
+                    <div class="item span4">
+                        <div class="key decoration"></div>
+                        <h2><a>Guidance</a></h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan dui ac nunc imperdiet rhoncus. Aenean vitae imperdiet lectus</p>
+                        <a href="#" class="btn btn-primary">Read more</a>
+                    </div><!-- /.item -->
+                </div><!-- /.bottom-inner -->
+            </div><!-- /.bottom -->
+        </div><!-- /.bottom-wrapper -->    
+    </div><!-- /#content -->
+    <!-- /#wrapper-inner -->
+
+
+
+{% endblock %}

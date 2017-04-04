@@ -1,0 +1,7 @@
+newsletter_homepage:
+    path:     /
+    defaults: { _controller: NewsletterBundle:Default:index }
+
+add_newsletter:
+    path:     /newsletter/new
+    defaults: { _controller: NewsletterBundle:Default:new }

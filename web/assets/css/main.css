@@ -1,0 +1,22 @@
+.loading{
+    float: left;
+    margin-left: 50px;
+    margin-top: -70px;
+    width: 30px;
+    height: 30px;
+    display: block;
+    background-image: url('../loading.gif');
+}
+
+select{
+    height:40px;
+    border-radius: 0;
+    width: 100%;
+    margin: 0;
+
+}
+
+select option{
+    color: #000;
+}
+

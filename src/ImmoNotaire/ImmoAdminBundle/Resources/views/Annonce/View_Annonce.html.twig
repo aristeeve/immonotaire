@@ -1,0 +1,455 @@
+{%extends 'baseAdmin.html.twig'%}
+{%block title%}Annonce détails{%endblock%}
+{%block js%}
+    <script type="text/javascript" src="{{asset('admin/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/forms/selects/select2.min.js')}}"></script>
+
+    <script type="text/javascript" src="{{asset('admin/js/core/app.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/pages/datatables_basic.js')}}"></script>
+{%endblock%}
+
+{%block header%}
+    <!-- Page header -->
+    <div class="page-header page-header-default">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Accueil</span> - Listes des annonces</h4>
+            </div>
+        </div>
+
+        <div class="breadcrumb-line">
+            <ul class="breadcrumb">
+                <li><a href="{{path('immo_admin_homepage')}}"><i class="icon-home2 position-left"></i> Accueil</a></li>
+                <li><a href="{{path('immo_admin_annonce')}}">Liste des annonces</a></li>
+                <li class="active">Détail annonce</li>
+            </ul>
+        </div>
+    </div>
+{%endblock%}
+{%block body%}
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">Détail annonce</h5>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="collapse"></a></li>
+                    <li><a data-action="reload"></a></li>
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+
+            {%for message in app.session.flashbag.get('succes')%}
+
+                <div class="alert alert-info">
+                    {{message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                </div>
+            {%endfor%}
+        </div>
+
+        {%for item in annonce%}
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="padding-5">
+                        <h2>{{item.annonce.titre|capitalize}} <span class="label bg-info">{{item.annonce.vue}} Vue(s)</span></h2>
+                    </div>
+                    <div class="panel padding-5">
+
+                        {%if item.annonce.media.file is empty%}
+                            {%if item.annonce.media.file1 is empty%}
+                                {%if item.annonce.media.file2 is empty%}
+                                    {%if item.annonce.media.file3 is empty%}
+                                        {%if item.annonce.media.file4 is empty%}
+                                            <img src="{{asset('upload/image/default.png')}}" alt=""style="width: 590px;">
+
+                                        {%endif%}
+                                        <img src="{{asset('upload/image/')}}{{item.annonce.media.file4}}" alt=""style="width: 590px;">
+
+                                    {%endif%}
+                                    <img src="{{asset('upload/image/')}}{{item.annonce.media.file3}}" alt=""style="width: 590px;">
+
+                                {%endif%}
+                                <img src="{{asset('upload/image/')}}{{item.annonce.media.file2}}" alt=""style="width: 590px;">
+
+                            {%endif%}
+                            <img src="{{asset('upload/image/')}}{{item.annonce.media.file1}}" alt=""style="width: 590px;">
+                        {%else%}
+                            <img src="{{asset('upload/image/')}}{{item.annonce.media.file}}" alt=""style="width: 590px;">
+                        {%endif%}
+
+                    </div>
+                    <div class="row">
+                        {%if item.annonce.media%}
+                            {%if item.annonce.media.file1%}
+                                <div class="col-lg-3">
+                                    <div class="panel padding-5">
+                                        <img src="{{asset('upload/image/')}}{{item.annonce.media.file1}}" alt="" width="122">
+                                    </div>
+                                </div>
+                            {%endif%}
+                            {%if item.annonce.media.file2%}
+                                <div class="col-lg-3">
+                                    <div class="panel padding-5">
+                                        <img src="{{asset('upload/image/')}}{{item.annonce.media.file2}}" alt="" width="122">
+                                    </div>
+                                </div>
+                            {%endif%}
+                            {%if item.annonce.media.file3%}
+                                <div class="col-lg-3">
+                                    <div class="panel padding-5">
+                                        <img src="{{asset('upload/image/')}}{{item.annonce.media.file3}}" alt="" width="122">
+                                    </div>
+                                </div>
+                            {%endif%}
+                            {%if item.annonce.media.file4%}
+                                <div class="col-lg-3">
+                                    <div class="panel padding-5">
+                                        <img src="{{asset('upload/image/')}}{{item.annonce.media.file4}}" alt="" width="122">
+                                    </div>
+                                </div>
+                            {%endif%}
+                        {%endif%}
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="panel padding-5">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">Informations</h2>
+                            <div class="heading-elements">
+                                <ul class="icons-list">
+                                    <li><a data-action="collapse"></a></li>
+                                    <li><a data-action="reload"></a></li>
+                                    <li><a data-action="close"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <table class="table table-columned">
+                            {%if item.annonce.prix%}
+                                <tr>
+                                    <th>Prix:</th>
+                                    <td>{{item.annonce.prix|abs}} Fcfa</td>
+                                </tr>
+                            {%endif%}
+                            {%if item.annonce.typeannonce.nom%}
+                                <tr>
+                                    <th>Contrat:</th>
+                                    <td>{{item.annonce.typeannonce.nom|capitalize}}</td>
+                                </tr>
+                            {%endif%}
+                            {%if item.annonce.ville%}
+                                <tr>
+                                    <th>Ville:</th>
+                                    <td>{{item.annonce.ville|capitalize}}</td>
+                                </tr>
+                            {%endif%}
+                            {%if item.annonce.commune%}
+                                <tr>
+                                    <th>Commune:</th>
+                                    <td>{{item.annonce.commune|capitalize}}</td>
+                                </tr>
+                            {%endif%}
+                            {%if item.superficie%}
+                                <tr>
+                                    <th>Superficie:</th>
+                                    <td>{{item.superficie|abs}}m<sup>2</sup></td>
+                                </tr>
+                            {%endif%}
+                            {%if item.espacehabitable is defined%}
+                                {%if item.espacehabitable%}
+                                    <tr>
+                                        <th>Espace habitable: </th>
+                                        <td>{{item.espacehabitable|abs}}m<sup>2</sup></td>
+                                    </tr>
+                                {%endif%}
+                            {%endif%}
+                            {%if item.piece is defined%}
+                                {%if item.piece%}
+                                    <tr>
+                                        <th>Pièce: </th>
+                                        <td>{{item.piece|abs}}</td>
+                                    </tr>
+                                {%endif%}
+                            {%endif%}
+                            {%if item.chambre is defined%}
+                                {%if item.chambre%}
+                                    <tr>
+                                        <th>Chambre: </th>
+                                        <td>{{item.chambre|abs}}</td>
+                                    </tr>
+                                {%endif%}
+                            {%endif%}
+                            {%if item.sallebain is defined%}
+                                {%if item.sallebain%}
+                                    <tr>
+                                        <th>Salle de bain: </th>
+                                        <td>{{item.sallebain|abs}}</td>
+                                    </tr>
+                                {%endif%}
+                            {%endif%}
+                            {%if item.salon is defined%}
+                                {%if item.salon%}
+                                    <tr>
+                                        <th>Salon: </th>
+                                        <td>{{item.salon|abs}}</td>
+                                    </tr>
+                                {%endif%}
+                            {%endif%}
+                            {%if item.etage is defined%}
+                                {%if item.etage%}
+                                    <tr>
+                                        <th>Etage: </th>
+                                        <td>{{item.etage|abs}}</td>
+                                    </tr>
+                                {%endif%}
+                            {%endif%}
+                        </table>
+                        <style>
+                            th{text-align: left;}
+                        </style>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="panel-heading">
+                        <h5 class="panel-title">Information supplementaire</h5>
+                        <div class="heading-elements">
+                            <ul class="icons-list">
+                                <li><a data-action="collapse"></a></li>
+                                <li><a data-action="reload"></a></li>
+                                <li><a data-action="close"></a></li>
+                            </ul>
+                        </div>
+
+                        {%for message in app.session.flashbag.get('succes')%}
+
+                            <div class="alert alert-info">
+                                {{message}}
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            </div>
+                        {%endfor%}
+                    </div>
+                    <div class="row">
+                        <div class="padding-10">
+                            <div class="col-lg-3">
+                                {%if item.chauffeeau is defined%}
+                                    {%if item.chauffeeau%}
+
+                                        <label>
+                                            <li class="fa fa-check-circle"></li>
+                                            {%else%}
+                                            <li class="fa fa-close"></li>
+                                            {%endif%}
+                                        Chauffe eau
+                                    </label>
+                                    <br/>
+                                {%endif%}
+                                {%if item.cour is defined%}
+                                    {%if item.cour%}
+
+                                        <label>
+                                            <li class="fa fa-check-circle"></li>
+                                            {%else%}
+                                            <li class="fa fa-close"></li>
+                                            {%endif%}
+                                        Cour
+                                    </label>
+                                    <br/>
+                                {%endif%}
+                                {%if item.jardin is defined%}
+                                    {%if item.jardin%}       
+
+                                        <label>
+                                            <li class="fa fa-check-circle"></li>
+                                            {%else%}
+                                            <li class="fa fa-close"></li>
+                                            {%endif%}
+                                        Jardin
+                                    </label>
+                                    <br/>
+                                {%endif%}
+
+                                {%if item.interphone is defined%}
+                                    {%if item.interphone%}
+
+                                        <label>
+                                            <li class="fa fa-check-circle"></li>
+                                            {%else%}
+                                            <li class="fa fa-close"></li>
+                                            {%endif%}
+                                        Interphone
+                                    </label>
+                                    <br/>
+                                {%endif%}
+                            </div>
+                            <div class="col-lg-3">
+                                {%if item.piscine is defined%}
+                                    {%if item.piscine%}
+
+                                        <label>
+                                            <li class="fa fa-check-circle"></li>
+                                            {%else%}
+                                            <li class="fa fa-close"></li>
+                                            {%endif%}
+                                        Piscine
+                                    </label>
+                                    <br/>
+                                {%endif%}
+                                {%if item.garage is defined%}
+                                    {%if item.garage%}
+
+                                        <label>
+                                            <li class="fa fa-check-circle"></li>
+                                            {%else%}
+                                            <li class="fa fa-close"></li>
+                                            {%endif%}
+                                        Garage
+                                    </label>
+                                    <br/>
+                                {%endif%}
+                                {%if item.ascenseur is defined%}
+                                    {%if item.ascenseur%}
+
+                                        <label>
+                                            <li class="fa fa-check-circle"></li>
+                                            {%else%}
+                                            <li class="fa fa-close"></li>
+                                            {%endif%}
+                                        Ascenceur
+                                    </label>
+                                    <br/>
+                                {%endif%}
+                                {%if item.vuemer is defined%}
+                                    {%if item.vuemer%}
+
+                                        <label>
+                                            <li class="fa fa-check-circle"></li>
+                                            {%else%}
+                                            <li class="fa fa-close"></li>
+                                            {%endif%}
+                                        Vue mer
+                                    </label>
+                                    <br/>
+                                {%endif%}
+                            </div>
+                            <div class="col-lg-3">
+                                {%if item.parking is defined%}
+                                    {%if item.parking%}
+
+                                        <label>
+                                            <li class="fa fa-check-circle"></li>
+                                            {%else%}
+                                            <li class="fa fa-close"></li>
+                                            {%endif%}
+                                        Parking
+                                    </label>
+                                    <br/>
+                                {%endif%}
+                                {%if item.gardiennage is defined%}
+                                    {%if item.gardiennage%}
+
+                                        <label>
+                                            <li class="fa fa-check-circle"></li>
+                                            {%else%}
+                                            <li class="fa fa-close"></li>
+                                            {%endif%}
+                                        Gardiennage
+                                    </label>
+                                    <br/>
+                                {%endif%}
+                                {%if item.vuelagune is defined%}
+                                    {%if item.vuelagune%}
+
+                                        <label>
+                                            <li class="fa fa-check-circle"></li>
+                                            {%else%}
+                                            <li class="fa fa-close"></li>
+                                            {%endif%}
+                                        Vue lagune
+                                    </label>
+                                    <br/>
+                                {%endif%}
+                                {%if item.meuble is defined%}
+                                    {%if item.meuble %}
+
+                                        <label>
+                                            <li class="fa fa-check-circle"></li>
+                                            {%else%}
+                                            <li class="fa fa-close"></li>
+                                            {%endif%}
+                                        Meublé
+                                    </label>
+                                    <br/>
+                                {%endif%}
+                            </div>
+                            <div class="col-lg-3">
+                                {%if item.bordureroute is defined%}
+                                    {%if item.bordureroute %}
+
+                                        <label>
+                                            <li class="fa fa-check-circle"></li>
+                                            {%else%}
+                                            <li class="fa fa-close"></li>
+                                            {%endif%}
+                                        Bordure de route
+                                    </label>
+                                    <br/>
+                                {%endif%}
+                                {%if item.systemealarme is defined%}
+                                    {%if item.systemealarme%}
+
+                                        <label>
+                                            <li class="fa fa-check-circle"></li>
+                                            {%else%}
+                                            <li class="fa fa-close"></li>
+                                            {%endif%}
+                                        Système d'alarme
+                                    </label>
+                                    <br/>
+                                {%endif%}
+                                {%if item.balcon is defined%}
+                                    {%if item.balcon%}
+
+                                        <label>
+                                            <li class="fa fa-check-circle"></li>
+                                            {%else%}
+                                            <li class="fa fa-close"></li>
+                                            {%endif%}
+                                        Balcon
+                                    </label>
+                                    <br/>
+                                {%endif%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <a class="btn btn-danger" title="Déplacer dans la corbeille" data-toggle="modal" data-target="#del" href="#"><i class="fa fa-trash"></i> Supprimer cette annonce</a>
+                </div>
+                <div class="modal fade" id="del" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h2 class="modal-title fg-red" id="myModalLabel"><i class="fa fa-warning"></i> Suppression annonce</h2>
+                            </div>
+                            <div class="modal-body">
+                                <p >
+                                <h3>Voulez vous supprimer définitivement cette annonce ? </h3>
+                                </p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <a class="btn btn-success" href="{{path('immo_admin_supprimer',{'id':item.annonce.id})}}"><i class="fa fa-trash"></i> OUI</a>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"></i> NON</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {%endfor%}
+
+    </div>
+
+{%endblock%}

@@ -1,0 +1,249 @@
+{% extends 'baseAdmin.html.twig' %}
+{%block body%}
+    <!-- CONTENT -->
+    <div id="content">
+        <div class="container">
+            <div>
+                <div id="main">
+                    <h1 class="page-header">Login</h1>
+                    <div class="login-register">
+                        <div class="row">
+                            <div class="span4">
+                                <ul class="tabs nav nav-tabs">
+                                    <li><a href="#register">s'incrire</a></li>
+                                </ul>
+                                <!-- /.nav -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="login">
+                                        {% trans_default_domain 'FOSUserBundle' %}
+
+                                        {% if error %}
+                                            <div class="fg-red margin-bottom-10">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                        {% endif %}
+
+                                        <form  action="{{ path("fos_user_registration_register") }}" method="post">
+                                            {% if csrf_token %}
+                                                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                                            {% endif %}
+                                            <div class="control-group">
+                                                <label class="control-label" for="inputLoginLogin">
+                                                    {{ form_label(form.email) }}
+                                                    <span class="form-required" title="Ce champ est obligatoire.">*</span>
+                                                </label>
+
+                                                <div class="controls">
+                                                    {{ form_widget(form.email) }}
+                                                    {{ form_errors(form.email }}
+                                                </div>
+                                                <!-- /.controls -->
+                                            </div>
+                                            <!-- /.control-group -->
+
+                                            <div class="control-group">
+                                                <label class="control-label" for="inputLoginLogin">
+                                                    {{ form_label(form.username) }}
+                                                    <span class="form-required" title="Ce champ est obligatoire.">*</span>
+                                                </label>
+
+                                                <div class="controls">
+                                                    {{ form_widget(form.username) }}
+                                                    {{ form_errors(form.username) }}
+                                                </div>
+                                                <!-- /.controls -->
+                                            </div>
+                                            <!-- /.control-group -->
+
+                                            <div class="control-group">
+                                                <label class="control-label" for="inputLoginLogin">
+                                                    {{ form_label(form.plainPassword.first) }}
+                                                    <span class="form-required" title="Ce champ est obligatoire.">*</span>
+                                                </label>
+
+                                                <div class="controls">
+                                                    {{ form_widget(form.plainPassword.first) }}
+                                                    {{ form_errors(form.plainPassword.first) }}
+                                                </div>
+                                                <!-- /.controls -->
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="inputLoginLogin">
+                                                    {{ form_label(form.plainPassword.second) }}
+                                                    <span class="form-required" title="Ce champ est obligatoire.">*</span>
+                                                </label>
+
+                                                <div class="controls">
+                                                    {{ form_widget(form.plainPassword.second) }}
+                                                    {{ form_errors(form.plainPassword.second) }}
+                                                </div>
+                                                <!-- /.controls -->
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="inputLoginLogin">
+                                                    {{ form_label(form.etude) }}
+                                                    <span class="form-required" title="Ce champ est obligatoire.">*</span>
+                                                </label>
+
+                                                <div class="controls">
+                                                    {{ form_widget(form.etude) }}
+                                                    {{ form_errors(form.etude) }}
+                                                </div>
+                                                <!-- /.controls -->
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="inputLoginLogin">
+                                                    {{ form_label(form.siege) }}
+                                                    <span class="form-required" title="Ce champ est obligatoire.">*</span>
+                                                </label>
+
+                                                <div class="controls">
+                                                    {{ form_widget(form.siege) }}
+                                                    {{ form_errors(form.siege) }}
+                                                </div>
+                                                <!-- /.controls -->
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="inputLoginLogin">
+                                                    {{ form_label(form.personneAContacter) }}
+                                                    <span class="form-required" title="Ce champ est obligatoire.">*</span>
+                                                </label>
+
+                                                <div class="controls">
+                                                    {{ form_widget(form.personneAContacter) }}
+                                                    {{ form_errors(form.personneAContacter) }}
+                                                </div>
+                                                <!-- /.controls -->
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="inputLoginLogin">
+                                                    {{ form_label(form.contact) }}
+                                                    <span class="form-required" title="Ce champ est obligatoire.">*</span>
+                                                </label>
+
+                                                <div class="controls">
+                                                    {{ form_widget(form.contact) }}
+                                                    {{ form_errors(form.contact) }}
+                                                </div>
+                                                <!-- /.controls -->
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="inputLoginLogin">
+                                                    {{ form_label(form.telephone) }}
+                                                    <span class="form-required" title="Ce champ est obligatoire.">*</span>
+                                                </label>
+
+                                                <div class="controls">
+                                                    {{ form_widget(form.telephone) }}
+                                                    {{ form_errors(form.telephone) }}
+                                                </div>
+                                                <!-- /.controls -->
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="inputLoginLogin">
+                                                    {{ form_label(form.telecopie) }}
+                                                    <span class="form-required" title="Ce champ est obligatoire.">*</span>
+                                                </label>
+
+                                                <div class="controls">
+                                                    {{ form_widget(form.telecopie) }}
+                                                    {{ form_errors(form.telecopie) }}
+                                                </div>
+                                                <!-- /.controls -->
+                                            </div>
+
+                                            <!-- /.control-group -->
+
+                                            <div class="form-actions">
+                                                <input type="submit" name="_submit" value="{{ 'registration.submit'|trans }}" class="btn btn-primary arrow-right" />
+                                            </div>
+                                            <!-- /.form-actions -->
+                                        </form>
+                                    </div>
+                                    <!-- /.tab-pane -->
+                                </div>
+                                <!-- /.tab-content -->
+                            </div>
+                            <!-- /.span4-->
+
+                            <div class="span8">
+                                <h2 class="page-header">Why to work with us?</h2>
+
+                                <div class="images row">
+                                    <div class="item span2">
+                                        <img src="{{asset('assets/img/icons/circle-dollar.png')}}" alt="">
+
+                                        <h3>Cheap services</h3>
+                                    </div>
+                                    <!-- /.item -->
+                                    <div class="item span2">
+                                        <img src="{{asset('assets/img/icons/circle-search.png')}}" alt="">
+
+                                        <h3>Easy to find you</h3>
+                                    </div>
+                                    <!-- /.item -->
+                                    <div class="item span2">
+                                        <img src="{{asset('assets/img/icons/circle-global.png')}}" alt="">
+
+                                        <h3>Act global or local</h3>
+                                    </div>
+                                    <!-- /.item -->
+                                    <div class="item span2">
+                                        <img src="{{asset('assets/img/icons/circle-package.png')}}" alt="">
+
+                                        <h3>All in one package</h3>
+                                    </div>
+                                    <!-- /.item -->
+                                </div>
+                                <!-- /.row -->
+
+                                <hr class="dotted">
+
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ullamcorper libero sed ante auctor vel
+                                    gravida nunc placerat. Suspendisse molestie posuere sem, in viverra dolor venenatis sit amet. Aliquam
+                                    gravida nibh quis justo pulvinar luctus. Phasellus a malesuada massa.
+                                </p>
+
+                                <ul class="unstyled dotted">
+                                    <li>
+                                        <span class="inner">
+                                            <strong>Lorem ipsum dolor sit amet</strong><br>
+
+                                            Consectetur adipiscing elit. Proin aliquam lorem sed urna viverra
+                                            accumsan. Aliquam sit amet dui et diam rutrum aliquet. Sed vulputate,
+                                            arcu vitae aliquet facilisis, ligula sem posuere nisl, sit amet pretium
+                                            ligula dolor
+
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <span class="inner">
+                                            <strong>Lorem ipsum dolor sit amet</strong><br>
+                                            Consectetur adipiscing elit. Proin aliquam lorem sed urna viverra
+                                            accumsan. Aliquam sit amet dui et diam rutrum aliquet. Sed vulputate,
+                                            arcu vitae aliquet facilisis, ligula sem posuere nisl, sit amet pretium
+                                            ligula dolor
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <span class="inner">
+                                            <strong>Lorem ipsum dolor sit amet</strong><br>
+                                            Consectetur adipiscing elit. Proin aliquam lorem sed urna viverra
+                                            accumsan. Aliquam sit amet dui et diam rutrum aliquet. Sed vulputate,
+                                            arcu vitae aliquet facilisis, ligula sem posuere nisl, sit amet pretium
+                                            ligula dolor
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div><!-- /.login-register -->        
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /#content -->
+</div><!-- /#wrapper-inner -->
+{%endblock%}

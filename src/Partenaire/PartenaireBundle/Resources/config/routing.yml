@@ -1,0 +1,7 @@
+partenaire_partenaire:
+    resource: "@PartenaireBundle/Resources/config/routing/partenaire.yml"
+    prefix:   /partenaire
+
+partenaire_homepage:
+    path:     /
+    defaults: { _controller: PartenaireBundle:Default:index }

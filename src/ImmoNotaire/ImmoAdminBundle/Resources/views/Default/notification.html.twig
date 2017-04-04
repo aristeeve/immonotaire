@@ -1,0 +1,86 @@
+{%extends 'baseAdmin.html.twig'%}
+{%block title%}Notification{%endblock%}
+{%block js%}
+    <script type="text/javascript" src="{{asset('admin/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/forms/selects/select2.min.js')}}"></script>
+
+    <script type="text/javascript" src="{{asset('admin/js/core/app.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/pages/datatables_basic.js')}}"></script>
+{%endblock%}
+
+{%block header%}
+    <!-- Page header -->
+    <div class="page-header page-header-default">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Accueil</span> - Listes des notifications</h4>
+            </div>
+        </div>
+
+        <div class="breadcrumb-line">
+            <ul class="breadcrumb">
+                <li><a href="{{path('immo_admin_homepage')}}"><i class="icon-home2 position-left"></i> Accueil</a></li>
+                <li class="active">Liste des notification</li>
+            </ul>
+        </div>
+    </div>
+{%endblock%}
+
+{%block body%}
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">Liste des notification</h5>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="collapse"></a></li>
+                    <li><a data-action="reload"></a></li>
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+            <a class="btn btn-warning pull-right" href="{{path('delete_all_notification')}}"><i class="fa fa-trash"></i> Vider la liste</a>
+            {%for message in app.session.flashbag.get('info')%}
+
+                <div class="alert alert-info">
+                    {{message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                </div>
+
+            {%endfor%}
+        </div>
+
+        <table class="table datatable-basic">
+            <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>message</th>
+                    <th>Type</th>
+                    <th>Utilisateur</th>
+                    <th>Date</th>
+                    
+                    <th colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for elt in notifTab|reverse%}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{elt.action|capitalize}} {{elt.type}}</td>
+                        <td>{{elt.type|capitalize}}</td>
+                        <td>
+                            {{elt.User.etude|capitalize}}
+                        </td>
+                        <td>
+                            {{elt.date.date|date('d-m-Y')}}
+                        </td>
+                        <td >
+                            <a class="btn btn-danger"> <i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                
+            {%endfor%}
+            </tbody>
+        </table>
+    </div>
+
+
+{%endblock%}

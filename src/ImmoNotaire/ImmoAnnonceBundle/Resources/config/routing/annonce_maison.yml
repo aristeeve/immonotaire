@@ -1,0 +1,24 @@
+annonce_maison_index:
+    path:     /
+    defaults: { _controller: "ImmoAnnonceBundle:Annonce_maison:index" }
+    methods:  GET
+
+annonce_maison_show:
+    path:     /{id}/show
+    defaults: { _controller: "ImmoAnnonceBundle:Annonce_maison:show" }
+    methods:  GET
+
+annonce_maison_new:
+    path:     /new
+    defaults: { _controller: "ImmoAnnonceBundle:Annonce_maison:new" }
+    methods:  [GET, POST]
+
+annonce_maison_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ImmoAnnonceBundle:Annonce_maison:edit" }
+    methods:  [GET, POST]
+
+annonce_maison_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ImmoAnnonceBundle:Annonce_maison:delete" }
+    methods:  DELETE

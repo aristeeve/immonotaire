@@ -1,0 +1,4 @@
+services:
+#    galerie.example:
+#        class: Galerie\GalerieBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

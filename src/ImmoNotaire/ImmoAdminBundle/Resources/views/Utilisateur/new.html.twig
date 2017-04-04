@@ -1,0 +1,115 @@
+{%extends 'baseAdmin.html.twig'%}
+{%block title%}Utilisateur New{%endblock%}
+{%block js%}
+    <script type="text/javascript" src="{{asset('admin/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/forms/selects/select2.min.js')}}"></script>
+
+    <script type="text/javascript" src="{{asset('admin/js/core/app.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/pages/datatables_basic.js')}}"></script>
+{%endblock%}
+
+{%block header%}
+    <!-- Page header -->
+    <div class="page-header page-header-default">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Accueil</span> - Nouvel utilisateur</h4>
+            </div>
+        </div>
+
+        <div class="breadcrumb-line">
+            <ul class="breadcrumb">
+               <li><a href="{{path('immo_admin_homepage')}}"><i class="icon-home2 position-left"></i> Accueil</a></li>
+               <li><a href="{{path('immo_admin_utilisateur')}}">Liste des utilisateurs</a></li>
+               <li class="active">Nouvel utilisateur</li>
+            </ul>
+        </div>
+    </div>
+{%endblock%}
+
+{%block body%}
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <div class="panel panel-flat">
+                <div class="bg-blue-300" style="padding: 10px;">
+                    <h3 class="panel-title "><i class="fa fa-user"></i> Nouvel utilisateur
+                </div>
+                {{ form_start(form) }}
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>{{ form_label(form.username) }}</label>
+                        {{form_widget(form.username,{'attr':{'class':'form-control'}})}}
+                        <b class="text-danger">{{ form_errors(form.username) }}</b>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form_label(form.name) }}</label>
+                        {{form_widget(form.name,{'attr':{'class':'form-control'}})}}
+                        <b class="text-danger">{{ form_errors(form.name) }}</b>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form_label(form.firstname) }}</label>
+                        {{form_widget(form.firstname,{'attr':{'class':'form-control'}})}}
+                        <b class="text-danger">{{ form_errors(form.firstname) }}</b>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form_label(form.etude) }}</label>
+                        {{form_widget(form.etude,{'attr':{'class':'form-control'}})}}
+                        <b class="text-danger">{{ form_errors(form.etude) }}</b>
+                    </div>
+
+                    <div class="form-group">
+                        <label>{{ form_label(form.email) }}</label>
+                        {{form_widget(form.email,{'attr':{'class':'form-control'}})}}
+                        <b class="text-danger">{{ form_errors(form.email) }}</b>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form_label(form.ville) }}</label>
+                        {{form_widget(form.ville,{'attr':{'class':'form-control'}})}}
+                        <b class="text-danger">{{ form_errors(form.ville) }}</b>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form_label(form.siege) }}</label>
+                        {{form_widget(form.siege,{'attr':{'class':'form-control'}})}}
+                        <b class="text-danger">{{ form_errors(form.siege) }}</b>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form_label(form.personneAContacter) }}</label>
+                        {{form_widget(form.personneAContacter,{'attr':{'class':'form-control'}})}}
+                        <b class="text-danger">{{ form_errors(form.personneAContacter) }}</b>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form_label(form.contact) }}</label>
+                        {{form_widget(form.contact,{'attr':{'class':'form-control'}})}}
+                        <b class="text-danger">{{ form_errors(form.contact) }}</b>
+                    </div>
+
+                    <div class="form-group">
+                        <label>{{ form_label(form.telephone) }}</label>
+                        {{form_widget(form.telephone,{'attr':{'class':'form-control'}})}}
+                        <b class="text-danger">{{ form_errors(form.telephone) }}</b>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form_label(form.telecopie) }}</label>
+                        {{form_widget(form.telecopie,{'attr':{'class':'form-control'}})}}
+                        <b class="text-danger">{{ form_errors(form.telecopie) }}</b>
+                    </div>
+                     <div class="form-group">
+                        <label>{{ form_label(form.plainPassword.first) }}</label>
+                        {{form_widget(form.plainPassword.first,{'attr':{'class':'form-control'}})}}
+                        <b class="text-danger">{{ form_errors(form.plainPassword.first) }}</b>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form_label(form.plainPassword.second) }}</label>
+                        {{form_widget(form.plainPassword.second,{'attr':{'class':'form-control'}})}}
+                        <b class="text-danger">{{ form_errors(form.plainPassword.second) }}</b>
+                    </div>
+                    {{form_rest(form)}}
+
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary">Enregistrer <i class="icon-arrow-right14 position-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock%}

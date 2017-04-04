@@ -1,0 +1,169 @@
+#Page d'accueil
+immo_admin_homepage:
+    path:     /
+    defaults: { _controller: ImmoAdminBundle:Default:index }
+
+#route de la section Annonce de l'admin
+immo_admin_annonce:
+    path:     /annonce
+    defaults: { _controller: ImmoAdminBundle:Annonce:index }
+
+immo_admin_visualiser:
+    path:     /annonce/{id}/view
+    defaults: { _controller: ImmoAdminBundle:Annonce:visualiser }
+
+immo_admin_edit:
+    path:     /annonce/{id}/edit
+    defaults: { _controller: ImmoAdminBundle:Annonce:edit }
+
+immo_admin_restauration:
+    path:     /annonce/{id}/restauration
+    defaults: { _controller: ImmoAdminBundle:Annonce:restauration}
+
+immo_admin_archiver:
+    path:     /annonce/{id}/archiver
+    defaults: { _controller: ImmoAdminBundle:Annonce:archiver }
+
+immo_admin_supprimer:
+    path:     /annonce/{id}/supprimer
+    defaults: { _controller: ImmoAdminBundle:Annonce:supprimer }
+
+
+#route de la partie admin User
+immo_admin_utilisateur:
+    path:     /utilisateur
+    defaults: { _controller: ImmoAdminBundle:Utilisateur:index}
+
+immo_admin_utilisateur_activate:
+    path:     /utilisateur/{id}/activate
+    defaults: { _controller: ImmoAdminBundle:Utilisateur:activate}
+
+immo_admin_utilisateur_desactivate:
+    path:     /utilisateur/{id}/desactivate
+    defaults: { _controller: ImmoAdminBundle:Utilisateur:desactivate}
+
+add_role_admin:
+    path:    /utilisateur/{id}/add/role-admin
+    defaults: { _controller: ImmoAdminBundle:Utilisateur:AddRoleAdmin}
+
+remove_role_admin:
+    path:    /utilisateur/{id}/remove/role-admin
+    defaults: { _controller: ImmoAdminBundle:Utilisateur:RemoveRoleAdmin}
+
+add_premium:
+    path:    /utilisateur/{id}/add/premium
+    defaults: { _controller: ImmoAdminBundle:Utilisateur:AddPremium}
+
+remove_premium:
+    path:    /utilisateur/{id}/remove/premium
+    defaults: { _controller: ImmoAdminBundle:Utilisateur:RemovePremium}
+
+
+delete_utilisateur:
+    path:    /utilisateur/{utilisateur}/remove/user
+    defaults: { _controller: ImmoAdminBundle:Utilisateur:RemoveUser}
+
+visualiser_utilisateur:
+    path:    /utilisateur/{utilisateur}/view
+    defaults: { _controller: ImmoAdminBundle:Utilisateur:ViewUser}
+
+new_utilisateur:
+    path:   /utilisateur/new
+    defaults: { _controller: ImmoAdminBundle:Utilisateur:new}
+    
+edit_utilisateur:
+    path:   /utilisateur/{id}/edit
+    defaults: { _controller: ImmoAdminBundle:Utilisateur:edit}
+   
+    
+# route de la section notification
+
+list-notification:
+    path:   /notification
+    defaults: { _controller: ImmoAdminBundle:Notification:index}
+
+delete-notification:
+    path:   /notification/{id}/supprimer
+    defaults: { _controller: ImmoAdminBundle:Notification:delete}
+
+delete_all_notification:
+    path:   /notification/all
+    defaults: { _controller: ImmoAdminBundle:Notification:deleteAll}
+
+nouvelle_notification:
+    path:   /notification/nouvelle-notification
+    defaults: { _controller: ImmoAdminBundle:Notification:new}
+    options:
+         expose: true
+
+
+# route de la sectio partenaire
+
+list-partenaire:
+    path:   /partenaire
+    defaults:  {_controller: PartenaireBundle:Partenaire:index}
+
+edit-partenaire:
+    path:   partenaire/{id}/edit
+    defaults:  {_controller: PartenaireBundle:Partenaire:edit}
+
+new-partenaire:
+    path:   /partenaire/new
+    defaults:  {_controller: PartenaireBundle:Partenaire:new}
+
+show-partenaire:
+    path:   partenaire/{id}/show
+    defaults:  {_controller: PartenaireBundle:Partenaire:show}
+
+delete_partenaire:
+    path:   partenaire/{partenaire}/delete
+    defaults:  {_controller: PartenaireBundle:Partenaire:delete}
+    
+   
+ #route de la section newsletter
+ 
+list_newsletter:
+    path:   newsletter/
+    defaults:  {_controller: NewsletterBundle:Default:index}
+
+send_newsletter_automatic:
+    path:   newsletter/mail/send
+    defaults:  {_controller: NewsletterBundle:Default:send}
+
+reaction_newsletter:
+    path:   newsletter/redaction
+    defaults:  {_controller: NewsletterBundle:Default:WrittingNewsletter}
+
+envoi_apres_redaction:
+    path:   newsletter/redaction/envoie
+    defaults:  {_controller: NewsletterBundle:Default:sendWrittenNewsletter}
+    methods: POST
+    
+supprimer_newsletter:
+    path:   newsletter/{id}/delete 
+    defaults:  {_controller: NewsletterBundle:Default:delete}
+
+    
+#route de la section galerie
+list_photo:
+    path:   galerie/
+    defaults:  {_controller: GalerieBundle:Default:index}
+
+photo_new:
+    path:   galerie/new
+    defaults:  {_controller: GalerieBundle:Default:new}
+
+#route de la section publicité
+list_pub:
+    path:   publicite/
+    defaults:  {_controller: PubliciteBundle:Publicite:index}
+
+pub_edit:
+    path:   publicite/{id}/edit
+    defaults:  {_controller: PubliciteBundle:Publicite:edit}
+    
+pub_new:
+    path:     publicite/new
+    defaults: { _controller: "PubliciteBundle:Publicite:new" }
+    methods:  [GET, POST]
+   

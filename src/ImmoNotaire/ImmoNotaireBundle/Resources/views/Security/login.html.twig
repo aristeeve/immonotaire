@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+{%block title%}
+    Connectez-vous sur Immo-notaire
+{%endblock%}
+{%block body%}
+    <!-- CONTENT -->
+    <div id="content">
+        <div class="container">
+            <div>
+                <div id="main">
+
+                    <div class="login-register">
+                        <div class="row">
+                            <div class="span4" ></div>
+                            <div class="span4" >
+                                <div class="text-center margin-5">
+                                    <img class="" src="{{asset('img/default-user.png')}}" width="100" />
+                                </div>
+                                <div class="bg-white" id="login" style="padding:30px">
+                                    {% trans_default_domain 'FOSUserBundle' %}
+
+                                    {% if error %}
+                                        <div class="fg-red margin-bottom-10">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                    {% endif %}
+
+                                    <form  action="{{ path("fos_user_security_check") }}" method="post">
+                                        {% if csrf_token %}
+                                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                                        {% endif %}
+                                        <div class="control-group">
+                                            <label class="control-label" for="inputLoginLogin">
+                                                Nom d'utilisateur
+                                                <span class="form-required" title="Ce champ est obligatoire.">*</span>
+                                            </label>
+
+                                            <div class="controls">
+                                                <input type="text" id="inputLoginLogin"  name="_username" required="required" />
+                                            </div>
+                                            <!-- /.controls -->
+                                        </div>
+                                        <!-- /.control-group -->
+
+                                        <div class="control-group">
+                                            <label class="control-label" for="inputLoginPassword">
+                                                Mot de passe
+                                                <span class="form-required" title="Ce champ est obligatoire.">*</span>
+                                            </label>
+
+                                            <div class="controls">
+                                                <input type="password" id="inputLoginPassword" name="_password" required="required" />
+                                            </div>
+                                            <!-- /.controls -->
+                                        </div>
+                                        <!-- /.control-group -->
+
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                                            </div>
+                                            <label class="control-label" for="inputLoginPassword">
+                                                <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                                            </label>
+                                        </div>
+                                        <!-- /.control-group -->
+
+                                        <div class="form-actions">
+                                            <input type="submit" name="_submit" value="Se connecter" class="btn btn-primary arrow-right">
+                                        </div>
+                                        <!-- /.form-actions -->
+                                    </form>
+                                </div>
+                                <!-- /.tab-pane -->
+                            </div>
+                            <!-- /.tab-content -->
+                        </div>
+                        <!-- /.span4-->
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.login-register -->        
+            </div>
+        </div>
+    </div>
+
+</div><!-- /#content -->
+</div><!-- /#wrapper-inner -->
+{%endblock%}

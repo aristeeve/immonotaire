@@ -1,0 +1,93 @@
+{%extends 'baseAdmin.html.twig'%}
+{%block title%}Liste des mails newsletter{%endblock%}
+{%block js%}
+    <script type="text/javascript" src="{{asset('admin/js/plugins/visualization/d3/d3.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/visualization/d3/d3_tooltip.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/forms/styling/switchery.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/forms/styling/uniform.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/forms/selects/bootstrap_multiselect.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/ui/moment/moment.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/pickers/daterangepicker.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+    <script type="text/javascript" src="assets/js/plugins/notifications/bootbox.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/notifications/sweet_alert.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/forms/selects/select2.min.js"></script>
+
+    <script type="text/javascript" src="assets/js/core/app.js"></script>
+    <script type="text/javascript" src="assets/js/pages/components_modals.js"></script>
+    <script type="text/javascript" src="{{asset('admin/js/core/app.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/pages/dashboard.js')}}"></script>
+
+{%endblock%}
+{%block header%}
+    <!-- Page header -->
+    <div class="page-header page-header-default">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Accueil</span> - Newsletter</h4>
+            </div>
+        </div>
+
+        <div class="breadcrumb-line">
+            <ul class="breadcrumb">
+                <li><a href="index.html"><i class="icon-home2 position-left"></i> Accueil</a></li>
+                <li class="active">Newsletter</li>
+            </ul>
+        </div>
+    </div>
+{%endblock%}
+
+{%block body%}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-flat">
+                {% if app.session.flashBag.has('letter') %}
+                    <div class="alert alert-success"  role="alert">
+                        {% for msg in app.session.flashBag.get('letter') %}
+                            {{ msg }}
+                        {% endfor %}
+                    </div>
+                {%endif%}
+                <div class="panel-heading">
+                    <h6 class="panel-title">Liste des contacts newsletter <span class="label bg-success heading-text">{{newsletters|length}} Abonnées</span></h6>
+                    <div class="heading-elements">
+                        <a class="btn btn-success pull-right margin-right-10 margin-left-10"  href="{{path('reaction_newsletter')}}"><i class="fa fa-edit"></i> Rediger une newsletter</a>
+
+                        <a class="btn btn-info pull-left"  href="{{path('send_newsletter_automatic')}}"><i class="fa fa-send-o"></i> Envoi des dernières annonces</a>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped" style="max-height: 1000px; overflow: scroll;">
+                        <thead>
+                        <th>Email</th>
+                        <th>active</th>
+                        <th>Action</th>
+                        </thead>
+                        <tbody>
+                            {%for news in newsletters%}
+                                <tr>
+                                    <td>{{news.email}}</td>
+                                    <td>
+                                        {%if news.enable == 1%}
+                                            <span class="label bg-success heading-text">Actif</span>
+                                        {%else%}
+                                            <span class="label bg-danger heading-text">Inactif</span>
+                                        {%endif%}
+                                    </td>
+
+                                    <td>
+                                        <a class="btn btn-danger" href="{{path('supprimer_newsletter',{'id':news.id})}}">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%endblock%}

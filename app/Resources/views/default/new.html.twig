@@ -1,0 +1,263 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="list-your-property-form">
+        <h2 class="page-header">Créer votre annonce</h2>
+
+        <div class="content">
+            <div class="row">
+                <div class="span8">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ullamcorper libero sed ante auctor vel gravida nunc placerat. Suspendisse molestie posuere sem, in viverra dolor venenatis sit amet. Aliquam gravida nibh quis justo pulvinar luctus. Phasellus a malesuada massa.
+                    </p>
+                </div><!-- /.span8 -->
+            </div><!-- /.row -->
+            <form method="post" action="{{ path('notaire_annonce_terrain_new') }}" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="span4">
+                        <h3><strong>1.</strong> <span>Informations</span></h3>
+
+                        <div class="control-group">
+                            <label class="control-label" for="title">
+                                Titre
+                                <span class="form-required" title="This field is required.">*</span>
+                            </label>
+                            <div class="controls">
+                                {{ form_row(form.annonce.titre,{'attr':{'id':'title'}}) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+
+                        <div class="control-group">
+                            <label class="control-label" for="transaction">
+                                Type de transaction
+                                <span class="form-required" title="This field is required.">*</span>
+                            </label>
+                            <div class="controls">
+                                {{ form_row(form.annonce.type_annonce,{'placeholder':'Choisir un type de transaction','attr':{'id':'transaction'}}) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+
+                        <div class="control-group">
+                            <label class="control-label" for="propertytype">
+                                Type de bien
+                                <span class="form-required" title="This field is required.">*</span>
+                            </label>
+                            <div class="controls">
+                                {{ form_row(form.type_terrain,{'placeholder':'Choisir un type de bien','attr':{'id':'propertytype'}}) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+                        <div class="control-group">
+                            <label class="control-label" for="price">
+                                Prix
+                                <span class="form-required" title="This field is required.">*</span>
+                            </label>
+                            <div class="controls">
+                                {{ form_row(form.annonce.prix,{'placeholder':'Choisir un type de bien','attr':{'id':'price'}}) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+                    </div><!-- /.span4 -->
+
+                    <div class="span4">
+                        <h3><strong>2.</strong> <span>Détails du bien</span></h3>
+
+                        <div class="control-group">
+                            <label class="control-label" for="regions">
+                                Superficie (m<sup>2</sup>)
+                                <span class="form-required" title="This field is required.">*</span>
+                            </label>
+                            <div class="controls">
+                                {{ form_row(form.superficie,{'placeholder':'Choisir une région','attr':{'id':'regions','class':'region'}}) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+                        <div class="property-type control-group">
+                            <label class="control-label" for="area">
+                                Région
+                                <span class="form-required" title="This field is required.">*</span>
+                            </label>
+                            <div class="controls">
+                                {{ form_row(form.annonce.region,{'placeholder':'Choisir une region','attr':{'id':'area'}}) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+                        <div class="property-type control-group" style="margin-left:12px;">
+                            <label class="control-label" for="ville">
+                                Ville
+                                <span class="form-required" title="This field is required.">*</span>
+                            </label>
+                            <div class="controls">
+                                {{ form_row(form.annonce.ville,{'placeholder':'Choisir une ville','attr':{'id':'ville'}}) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+
+                        <div class="control-group">
+                            <label class="control-label" for="town">
+                                Commune / Quartier
+                                <span class="form-required" title="This field is required.">*</span>
+                            </label>
+                            <div class="controls">
+                                {{ form_row(form.annonce.commune,{'type':'text','attr':{'id':'town'}}) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+
+                        <div class="control-group">
+                            <label class="control-label" for="availablefrom">
+                                Disponible à partir de
+                                <!--<span class="form-required" title="This field is required.">*</span>-->
+                            </label>
+                            <div class="controls">
+                                {{ form_row(form.annonce.disponibilite,{'attr':{'id':'availablefrom'}}) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+                    </div><!-- /.span4 -->
+
+                    <div class="span4">
+                        <h3><strong>3.</strong> <span>Description du bien</span></h3>
+
+                        <div class="control-group">
+                            <label class="control-label" for="description">
+                                A propos du bien
+                                <span class="form-required" title="This field is required.">*</span>
+                            </label>
+                            <div class="controls">
+                                {{ form_row(form.annonce.description,{'attr':{'id':'description'}}) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+                    </div><!-- /.span4 -->
+                </div><!-- /.row -->
+                <div class="row">
+                    <div class="span4">
+                        <h3><strong>4.</strong> <span>Images</span></h3>
+                        <div class="fileupload fileupload-new control-group" data-provides="fileupload">
+                            <label class="control-label" for="inputPropertyPrice">
+                                Image principale
+                            </label>
+
+                            <div class="input-append">
+                                <div class="uneditable-input">
+                                    <i class="icon-file fileupload-exists"></i>
+                                    <span class="fileupload-preview"></span>
+                                </div>
+                                                <span class="btn btn-file" onclick="$('#file').click();">
+                                                    <span class="fileupload-new">
+                                                        {{ form_label(form.annonce.media.file) }}
+                                                        {{ form_errors(form.annonce.media.file) }}
+                                                    </span>
+                                                    <span class="fileupload-exists">{{ form_label(form.annonce.media.file) }}</span>
+                                                    {{ form_widget(form.annonce.media.file,{'type':'file','attr':{'style':'visibility:hidden','id':'file'}}) }}
+                                                </span>
+                            </div><!-- /.input-append -->
+                        </div><!-- .fileupload -->
+                        <div class="fileupload fileupload-new control-group" data-provides="fileupload">
+                            <label class="control-label" for="inputPropertyPrice">
+                                Autres images
+                            </label>
+
+                            <div class="input-append">
+                                <div class="uneditable-input">
+                                    <i class="icon-file fileupload-exists"></i>
+                                    <span class="fileupload-preview"></span>
+                                </div>
+                                                <span class="btn btn-file" onclick="$('#file').click();">
+                                                    <span class="fileupload-new">
+                                                        {{ form_label(form.annonce.media.file1) }}
+                                                        {{ form_errors(form.annonce.media.file1) }}
+                                                    </span>
+                                                    <span class="fileupload-exists">{{ form_label(form.annonce.media.file1) }}</span>
+                                                    {{ form_widget(form.annonce.media.file1,{'type':'file','attr':{'style':'visibility:hidden','id':'file'}}) }}
+                                                </span>
+                            </div><!-- /.input-append -->
+                        </div><!-- .fileupload -->
+                        <div class="fileupload fileupload-new control-group" data-provides="fileupload"><div class="input-append">
+                                <div class="uneditable-input">
+                                    <i class="icon-file fileupload-exists"></i>
+                                    <span class="fileupload-preview"></span>
+                                </div>
+                                                <span class="btn btn-file" onclick="$('#file').click();">
+                                                    <span class="fileupload-new">
+                                                        {{ form_label(form.annonce.media.file2) }}
+                                                        {{ form_errors(form.annonce.media.file2) }}
+                                                    </span>
+                                                    <span class="fileupload-exists">{{ form_label(form.annonce.media.file2) }}</span>
+                                                    {{ form_widget(form.annonce.media.file2,{'type':'file','attr':{'style':'visibility:hidden','id':'file'}}) }}
+                                                </span>
+                            </div><!-- /.input-append -->
+                        </div><!-- .fileupload -->
+                        <div class="fileupload fileupload-new control-group" data-provides="fileupload"><div class="input-append">
+                                <div class="uneditable-input">
+                                    <i class="icon-file fileupload-exists"></i>
+                                    <span class="fileupload-preview"></span>
+                                </div>
+                                                <span class="btn btn-file" onclick="$('#file').click();">
+                                                    <span class="fileupload-new">
+                                                        {{ form_label(form.annonce.media.file3) }}
+                                                        {{ form_errors(form.annonce.media.file3) }}
+                                                    </span>
+                                                    <span class="fileupload-exists">{{ form_label(form.annonce.media.file3) }}</span>
+                                                    {{ form_widget(form.annonce.media.file3,{'type':'file','attr':{'style':'visibility:hidden','id':'file'}}) }}
+                                                </span>
+                            </div><!-- /.input-append -->
+                        </div><!-- .fileupload -->
+                        <div class="fileupload fileupload-new control-group" data-provides="fileupload"><div class="input-append">
+                                <div class="uneditable-input">
+                                    <i class="icon-file fileupload-exists"></i>
+                                    <span class="fileupload-preview"></span>
+                                </div>
+                                                <span class="btn btn-file" onclick="$('#file').click();">
+                                                    <span class="fileupload-new">
+                                                        {{ form_label(form.annonce.media.file4) }}
+                                                        {{ form_errors(form.annonce.media.file4) }}
+                                                    </span>
+                                                    <span class="fileupload-exists">{{ form_label(form.annonce.media.file4) }}</span>
+                                                    {{ form_widget(form.annonce.media.file4,{'type':'file','attr':{'style':'visibility:hidden','id':'file'}}) }}
+                                                </span>
+                            </div><!-- /.input-append -->
+                    </div><!-- /.span4 -->
+                    </div><!-- /.span4 -->
+                    <div class="span4">
+                        <h3><strong>5.</strong> <span>Détails Contacts</span></h3>
+                        <div class="control-group">
+                            <label class="control-label" for="telmobile">
+                                Téléphone Portable
+                                <span class="form-required" title="This field is required.">*</span>
+                            </label>
+                            <div class="controls">
+                                {{ form_row(form.annonce.telMobile,{'attr':{'id':'telmobile'}}) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+                        <div class="control-group">
+                            <label class="control-label" for="telfixe">
+                                Téléphone Fixe
+                            </label>
+                            <div class="controls">
+                                {{ form_row(form.annonce.telFixe,{'attr':{'id':'telfixe'}}) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+
+                    </div><!-- /.span4 -->
+                    <div class="span4">
+                        <h3><strong>Fin.</strong> <span>Sauvegarder / Publier</span></h3>
+                        <div  style="margin-bottom: 25px">
+                            <div class="controls" title="Si l'annonce est activée, elle sera visible par tous">
+                                {{ form_row(form.annonce.active,{'label':'Activer l\'annonce','type':'checkbox','label_attr':{'style':'display:inline'}}) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+                        <div  style="margin-bottom: 25px">
+                            <div class="controls" title="Si la case est cochée, vos contacts seront visibles par les visiteurs">
+                                {{ form_row(form.annonce.affiche_contact,{'label':'Afficher les contacts dans l\'annonce','type':'checkbox','label_attr':{'style':'display:inline'}}) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+
+                        <div class="control-group">
+                            <div class="form-group">
+                                <div class="">
+                                    <input type="submit" value="Sauvegarder / Publier l'annonce" class="btn btn-danger btn-large">
+                                </div>
+                            </div>
+                        </div><!-- /.control-group -->
+                    </div><!-- /.span4 -->
+                </div><!-- /.row -->
+                {{ form_end(form) }}
+            </form>
+        </div><!-- /.content -->
+    </div><!-- /.list-your-property-form -->
+{% endblock %}

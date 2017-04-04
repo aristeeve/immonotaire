@@ -1,0 +1,408 @@
+{% extends 'base.html.twig' %}
+{%block title%}
+    Détail de l'annonce
+{%endblock%}
+{% block body %}
+    <div id="content">
+        <div class="container">
+            <div id="main">
+                <div class="row">
+                    <div class="span6">
+                        <h1 class="page-header">{{annonce.0.annonce.titre|capitalize}}</h1>
+
+                        <div class="carousel property">
+                            <div class="preview">
+                                {%if annonce.0.annonce.media.file is empty%}
+                                    {%if annonce.0.annonce.media.file1 is empty%}
+                                        {%if annonce.0.annonce.media.file2 is empty%}
+                                            {%if annonce.0.annonce.media.file3 is empty%}
+                                                {%if annonce.0.annonce.media.file4 is empty%}
+                                                    <img src="{{asset('upload/image/default.png')}}" alt=""style="width: 630px; height: 350px">
+
+                                                {%endif%}
+                                                <img src="{{asset('upload/image/')}}{{annonce.0.annonce.media.file4}}" alt=""style="width: 630px; height: 350px">
+
+                                            {%endif%}
+                                            <img src="{{asset('upload/image/')}}{{annonce.0.annonce.media.file3}}" alt=""style="width: 630px; height: 350px">
+
+                                        {%endif%}
+                                        <img src="{{asset('upload/image/')}}{{annonce.0.annonce.media.file2}}" alt=""style="width: 630px; height: 350px">
+
+                                    {%endif%}
+                                    <img src="{{asset('upload/image/')}}{{annonce.0.annonce.media.file1}}" alt=""style="width: 630px; height: 350px">
+                                {%else%}
+                                    <img src="{{asset('upload/image/')}}{{annonce.0.annonce.media.file}}" alt=""style="width: 630px; height: 350px">
+                                {%endif%}
+
+                            </div><!-- /.preview -->
+
+                            <div class="content">
+
+                                <a class="carousel-prev" href="#">Previous</a>
+                                <a class="carousel-next" href="#">Next</a>
+                                <ul>
+                                    <li class="active">
+                                        <img src="{{asset('upload/image/')}}{{annonce.0.annonce.media.file}}" alt="">
+                                    </li>
+                                    {%if annonce.0.annonce.media%}
+                                        {%if annonce.0.annonce.media.file1%}
+                                            <li>
+                                                <img src="{{asset('upload/image/')}}{{annonce.0.annonce.media.file1}}" alt="">
+                                            </li>
+                                        {%endif%}
+                                        {%if annonce.0.annonce.media.file2%}
+                                            <li>
+                                                <img src="{{asset('upload/image/')}}{{annonce.0.annonce.media.file2}}" alt="">
+                                            </li>
+                                        {%endif%}
+                                        {%if annonce.0.annonce.media.file3%}
+                                            <li>
+                                                <img src="{{asset('upload/image/')}}{{annonce.0.annonce.media.file3}}" alt="">
+                                            </li>
+                                        {%endif%}
+                                        {%if annonce.0.annonce.media.file4%}
+                                            <li>
+                                                <img src="{{asset('upload/image/')}}{{annonce.0.annonce.media.file4}}" alt="">
+                                            </li>
+                                        {%endif%}
+
+
+                                    {%endif%}
+                                </ul>
+                            </div>
+                            <!-- /.content -->
+                        </div>
+                        <!-- /.carousel -->
+                        {%if annonce.0.annonce.description%}
+                            <div class="bg-white padding-10">
+                                <h4 class="title">Description</h4>
+                                <p class="text-justify margin-top-5">{{annonce.0.annonce.description|capitalize}}.</p>
+                            </div>
+                        {%endif%}
+                    </div>
+                    {%if annonce.0.parking is defined%}
+                        <div class="span3">
+                            <div class=" padding-10 margin-top-5 bg-white border-1 border-solid">
+                                <h3>CARACTERISTIQUES</h3>
+                                <div class="property-detail">
+                                    <div class="row" style="margin-top: -20px">
+                                        <ul class="span2">
+                                            {%if annonce.0.chauffeeau is defined%}
+                                                {%if annonce.0.chauffeeau%}
+                                                    <li class="checked">
+                                                    {%else%}
+                                                    <li class="plain">
+                                                    {%endif%}
+                                                    Chauffe eau
+                                                </li>
+                                            {%endif%}
+                                            {%if annonce.0.cour is defined%}
+                                                {%if annonce.0.cour%}
+                                                    <li class="checked">
+                                                    {%else%}
+                                                    <li class="plain">
+                                                    {%endif%}
+                                                    Cour
+                                                </li>
+                                            {%endif%}
+                                            {%if annonce.0.jardin is defined%}
+                                                {%if annonce.0.jardin%}                                      
+                                                    <li class="checked">
+                                                    {%else%}
+                                                    <li class="plain">
+                                                    {%endif%}
+                                                    Jardin
+                                                </li>
+                                            {%endif%}
+
+                                            {%if annonce.0.interphone is defined%}
+                                                {%if annonce.0.interphone%}
+                                                    <li class="checked">
+                                                    {%else%}
+                                                    <li class="plain">
+                                                    {%endif%}
+                                                    Interphone
+                                                </li>
+                                            {%endif%}
+                                        </ul>
+                                        <ul class="span2">
+                                            {%if annonce.0.piscine is defined%}
+                                                {%if annonce.0.piscine%}
+                                                    <li class="checked">
+                                                    {%else%}
+                                                    <li class="plain">
+                                                    {%endif%}
+                                                    Piscine
+                                                </li>
+                                            {%endif%}
+                                            {%if annonce.0.garage is defined%}
+                                                {%if annonce.0.garage%}
+                                                    <li class="checked">
+                                                    {%else%}
+                                                    <li class="plain">
+                                                    {%endif%}
+                                                    Garage
+                                                </li>
+                                            {%endif%}
+                                            {%if annonce.0.ascenseur is defined%}
+                                                {%if annonce.0.ascenseur%}
+                                                    <li class="checked">
+                                                    {%else%}
+                                                    <li class="plain">
+                                                    {%endif%}
+                                                    Ascenseur
+                                                </li>
+                                            {%endif%}
+                                            {%if annonce.0.vuemer is defined%}
+                                                {%if annonce.0.vuemer%}
+                                                    <li class="checked">
+                                                    {%else%}
+                                                    <li class="plain">
+                                                    {%endif%}
+                                                    Vue sur mer
+                                                </li>
+                                            {%endif%}
+                                        </ul>
+                                        <ul class="span2">
+                                            {%if annonce.0.parking is defined%}
+                                                {%if annonce.0.parking%}
+                                                    <li class="checked">
+                                                    {%else%}
+                                                    <li class="plain">
+                                                    {%endif%}
+                                                    Parking
+                                                </li>
+                                            {%endif%}
+                                            {%if annonce.0.gardiennage is defined%}
+                                                {%if annonce.0.gardiennage%}
+                                                    <li class="checked">
+                                                    {%else%}
+                                                    <li class="plain">
+                                                    {%endif%}
+                                                    Gardiennage
+                                                </li>
+                                            {%endif%}
+                                            {%if annonce.0.vuelagune is defined%}
+                                                {%if annonce.0.vuelagune%}
+                                                    <li class="checked">
+                                                    {%else%}
+                                                    <li class="plain">
+                                                    {%endif%}
+                                                    Vue sur lagune
+                                                </li>
+                                            {%endif%}
+                                            {%if annonce.0.meuble is defined%}
+                                                {%if annonce.0.meuble %}
+                                                    <li class="checked">
+                                                    {%else%}
+                                                    <li class="plain">
+                                                    {%endif%}
+                                                    Meublé
+                                                </li>
+                                            {%endif%}
+                                        </ul>
+                                        <ul class="span2">
+                                            {%if annonce.0.bordureroute is defined%}
+                                                {%if annonce.0.bordureroute %}
+                                                    <li class="checked">
+                                                    {%else%}
+                                                    <li class="plain">
+                                                    {%endif%}
+                                                    Bordure de route
+                                                </li>
+                                            {%endif%}
+                                            {%if annonce.0.systemealarme is defined%}
+                                                {%if annonce.0.systemealarme%}
+                                                    <li class="checked">
+                                                    {%else%}
+                                                    <li class="plain">
+                                                    {%endif%}
+                                                    Système d'alarme
+                                                </li>
+                                            {%endif%}
+                                            {%if annonce.0.balcon is defined%}
+                                                {%if annonce.0.balcon%}
+                                                    <li class="checked">
+                                                    {%else%}
+                                                    <li class="plain">
+                                                    {%endif%}
+                                                    Balcon
+                                                </li>
+                                            {%endif%}
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {%endif%}
+                    <div class="span3">
+                        <div class=" padding-10 margin-top-5 bg-white border-1 border-solid">
+                            <h3>DETAILS </h3>
+                            <div class="">
+                                {%if annonce.0.annonce.prix%}
+                                    <p>
+                                        <label><b>Prix:</b> {{annonce.0.annonce.prix|abs|number_format(0,'','.')}} Fcfa</label>
+                                    </p>
+                                {%endif%}
+                                {%if annonce.0.annonce.typeannonce.nom%}
+                                    <p>
+                                        <label><b>Contrat: </b>{{annonce.0.annonce.typeannonce.nom|capitalize}}</label>
+                                    </p>
+                                {%endif%}
+                                {%if annonce.0.annonce.ville%}
+                                    <p>
+                                        <label><b>Ville: </b>{{annonce.0.annonce.ville|capitalize}}</label>
+                                    </p>  
+                                {%endif%}
+                                {%if annonce.0.annonce.commune%}
+                                    <p>
+                                        <label><b>Commune: </b>{{annonce.0.annonce.commune|capitalize}}</label>
+                                    </p> 
+                                {%endif%}
+                                {%if annonce.0.superficie%}
+                                    <p>
+                                        <label><b>Superficie: </b>{{annonce.0.superficie|abs}} m<sup>2</sup></label>
+                                    </p> 
+                                {%endif%}
+                                {%if annonce.0.espacehabitable is defined%}
+                                    {%if annonce.0.espacehabitable%}
+                                        <p>
+                                            <label><b>Espace habitable: </b>{{annonce.0.espacehabitable|abs}} m<sup>2</sup></label>
+                                        </p>
+                                    {%endif%}
+                                {%endif%}
+                                {%if annonce.0.piece is defined%}
+                                    {%if annonce.0.piece%}
+                                        <p>
+                                            <label><b>Pièce: </b>{{annonce.0.piece|abs}}</label>
+                                        </p>
+                                    {%endif%}
+                                {%endif%}
+                                {%if annonce.0.chambre is defined%}
+                                    {%if annonce.0.chambre%}
+                                        <p>
+                                            <label><b>Chambre: </b>{{annonce.0.chambre|abs}}</label>
+                                        </p>
+                                    {%endif%}
+                                {%endif%}
+                                {%if annonce.0.sallebain is defined%}
+                                    {%if annonce.0.sallebain%}
+                                        <p>
+                                            <label><b>Salle de bain: </b>{{annonce.0.sallebain|abs}}</label>
+                                        </p>
+
+                                    {%endif%}
+                                {%endif%}
+                                {%if annonce.0.salon is defined%}
+                                    {%if annonce.0.salon%}
+                                        <p>
+                                            <label><b>Salon: </b>{{annonce.0.salon|abs}}</label>
+                                        </p>
+                                    {%endif%}
+                                {%endif%}
+                                {%if annonce.0.etage is defined%}
+                                    {%if annonce.0.etage%}
+                                        <p>
+                                            <label><b>Etage: </b>{{annonce.0.etage|abs}}</label>
+                                        </p>
+                                    {%endif%}
+                                {%endif%}
+                            </div>
+                            {%if annonce.0.annonce.affichecontact %}
+                                <div class="margin-bottom-10 margin-top-10 " style="margin-top: 40px">
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ContactModal" style="width: 100%">
+                                        <i class="fa fa-phone"></i> Afficher le contact
+                                    </button>
+                                </div>
+                            {%endif%}
+                            <div class="margin-bottom-10" >
+                                <button type="button" class=" btn btn-primary" data-toggle="modal" data-target="#EmailModal" style="width: 100%">
+                                    <i class="fa fa-envelope"></i> Contacter par mail
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal fade" id="ContactModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <h1 class="modal-title fg-red" id="myModalLabel">Personne à contacter</h1>
+                            </div>
+                            <div class="modal-body">
+                                <h2 class="">Etude: {{annonce.0.annonce.user.etude|capitalize}}</h2>
+                                {%if annonce.0.annonce.telFixe%}
+                                    <p><h3><b>Telephone: </b>{{annonce.0.annonce.telFixe}}</h3></p>
+                                {%else%}
+                                    <p><h3><b>Telephone: </b>{{annonce.0.annonce.user.contact}}</h3></p>
+                                {%endif%}
+                                {%if annonce.0.annonce.telMobile%}
+                                    <p><h3><b>portable: </b>{{annonce.0.annonce.telMobile}}</h3></p>
+                                {%else%}
+                                    <p><h3><b>portable: </b>{{annonce.0.annonce.user.telephone}}</h3></p>
+                                {%endif%}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Terminer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="EmailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Envoyer un message à {{annonce.0.annonce.user.etude|capitalize}}</h4>
+                            </div>
+                            <form method="post" action="{{path('immo_annonce_mail')}}">
+                                <div class="modal-body">
+                                    <div class="row padding-10">
+                                        <div class="span2">
+                                            <div class="controls">
+                                                <input type="text" class="form-control" name="name" placeholder="Votre nom">
+                                            </div>
+                                        </div>
+                                        <div class="span2">
+                                            <div class="controls">
+                                                <input type="text" class="form-control" name="contact" placeholder="Votre contact">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row padding-10">
+                                        <div class="span4">
+                                            <div class="controls">
+                                                <input type="email" class="form-control" name="email" placeholder="Votre email">
+                                                <input type="hidden" class="form-control" name="destinataire" value="{{annonce.0.annonce.user.email}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row padding-10">
+                                        <div class="span4">
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label"> Votre message</label>
+                                                    <div class="controls">
+                                                        <textarea name="message" style="width: 368px; height: 150px; resize: none;"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success"> <i class="fa fa-envelope"></i> Envoyer</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>      
+            </div>
+        </div>
+    </div>
+
+
+{%endblock%}

@@ -1,0 +1,122 @@
+{%extends 'baseAdmin.html.twig'%}
+{%block title%}Annonce{%endblock%}
+{%block js%}
+    <script type="text/javascript" src="{{asset('admin/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/forms/selects/select2.min.js')}}"></script>
+
+    <script type="text/javascript" src="{{asset('admin/js/core/app.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/pages/datatables_basic.js')}}"></script>
+{%endblock%}
+
+{%block header%}
+    <!-- Page header -->
+    <div class="page-header page-header-default">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Accueil</span> - Listes des annonces</h4>
+            </div>
+        </div>
+
+        <div class="breadcrumb-line">
+            <ul class="breadcrumb">
+                <li><a href="{{path('immo_admin_homepage')}}"><i class="icon-home2 position-left"></i> Accueil</a></li>
+                <li class="active">Liste des annonces</li>
+            </ul>
+        </div>
+    </div>
+{%endblock%}
+
+{%block body%}
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">Liste des annonces</h5>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="collapse"></a></li>
+                    <li><a data-action="reload"></a></li>
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+
+            {%for message in app.session.flashbag.get('succes')%}
+
+                <div class="alert alert-info">
+                    {{message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                </div>
+            {%endfor%}
+        </div>
+
+        <table class="table datatable-basic">
+            <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>Titre</th>
+                    <th>Etude</th>
+                    <th>Immobilié</th>
+                    <th>Date de publication</th>
+                    <th>Statut</th>
+                    <th>Bail</th>
+                    <th colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for annonce in annonces%}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{annonce.titre|capitalize}}</td>
+                        <td>{{annonce.User.etude|capitalize}}</td>
+                        <td>{{annonce.typebiens.nom|capitalize}}</td>
+                        <td>{{annonce.creele|date('d-m-Y')}}</td>
+                        <td>
+                            {%if annonce.active == 1%}
+                                <span class="label label-success">Publié</span>
+                            {%else%}
+                                {%if annonce.supprimer == 1%}
+                                    <span class="label label-danger">supprimer</span>
+                                {%else%}
+                                    <span class="label label-warning">archivé</span>
+                                {%endif%}
+                            {%endif%}
+
+
+                        </td>
+                        <td>{{annonce.typeannonce.nom}}</td>
+
+                        <td class="">
+                            <div class="row">                                       
+                                <div class="col-md-3" style="margin-right: 5px;">
+                                    <a href="{{path('immo_admin_visualiser',{'id':annonce.id})}}" class=" btn btn-info" title="Visualiser l'annonce">
+                                        <i class="fa fa-eye" ></i>
+                                    </a>
+                                </div>
+                                <div class="col-md-3" style="margin-right: 5px;">
+                                    <a href="{{path('immo_admin_edit',{'id':annonce.id})}}" class=" btn btn-success" title=''>
+                                        <i class="fa fa-edit" ></i>
+                                    </a>
+                                </div>
+                                <div class="col-md-3">
+                                    {%if annonce.supprimer == 1 or annonce.active == 0%}
+                                        <a href="{{path('immo_admin_restauration',{'id':annonce.id})}}" class="btn btn-primary" title="Restaurer l'annonce">
+                                            <i class="fa fa-recycle"></i>
+                                        </a>
+                                    {%endif%}
+                                </div>
+                                {%if annonce.active == 1%}
+                                    <div class="col-md-3" style="margin-right: 5px;">
+                                        <a href="{{path('immo_admin_archiver',{'id':annonce.id})}}" class=" btn btn-warning" title="archiver l'annonce">
+                                            <i class="fa fa-folder" ></i>
+                                        </a>
+                                    </div>
+                                {%endif%}
+                            </div>
+                        </td>
+                    </tr>
+
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+
+
+{%endblock%}

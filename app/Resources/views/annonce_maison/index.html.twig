@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Annonce_maisons list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Superficie</th>
+                <th>Espace_habitable</th>
+                <th>Piece</th>
+                <th>Chambre</th>
+                <th>Salon</th>
+                <th>Salle_bain</th>
+                <th>Etage</th>
+                <th>Niveau_etage</th>
+                <th>Annee</th>
+                <th>Meuble</th>
+                <th>Place_parking</th>
+                <th>Interphone</th>
+                <th>Chauffe_eau</th>
+                <th>Balcon</th>
+                <th>Cour</th>
+                <th>Piscine</th>
+                <th>Jardin</th>
+                <th>Garage</th>
+                <th>Parking</th>
+                <th>Ascenseur</th>
+                <th>Gardiennage</th>
+                <th>Systeme_alarme</th>
+                <th>Bordure_route</th>
+                <th>Vue_lagune</th>
+                <th>Vue_mer</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for annonce_maison in annonce_maisons %}
+            <tr>
+                <td><a href="{{ path('annonce_maison_show', { 'id': annonce_maison.id }) }}">{{ annonce_maison.id }}</a></td>
+                <td>{{ annonce_maison.superficie }}</td>
+                <td>{{ annonce_maison.espacehabitable }}</td>
+                <td>{{ annonce_maison.piece }}</td>
+                <td>{{ annonce_maison.chambre }}</td>
+                <td>{{ annonce_maison.salon }}</td>
+                <td>{{ annonce_maison.sallebain }}</td>
+                <td>{{ annonce_maison.etage }}</td>
+                <td>{{ annonce_maison.niveauetage }}</td>
+                <td>{{ annonce_maison.annee }}</td>
+                <td>{{ annonce_maison.meuble }}</td>
+                <td>{{ annonce_maison.placeparking }}</td>
+                <td>{% if annonce_maison.interphone %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_maison.chauffeeau %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_maison.balcon %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_maison.cour %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_maison.piscine %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_maison.jardin %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_maison.garage %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_maison.parking %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_maison.ascenseur %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_maison.gardiennage %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_maison.systemealarme %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_maison.bordureroute %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_maison.vuelagune %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_maison.vuemer %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('annonce_maison_show', { 'id': annonce_maison.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('annonce_maison_edit', { 'id': annonce_maison.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('annonce_maison_new') }}">Create a new annonce_maison</a>
+        </li>
+    </ul>
+{% endblock %}

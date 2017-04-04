@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+{%block title%}
+Publication d'une annonce
+{%endblock%}
+{% block body %}
+    <div class="list-your-property-form " style="margin-bottom: 50px;">
+        <h2 class="page-header">Choix de l'immobilier à publier</h2>
+        <div class="content">
+            <div class="row">
+                <div class="span8">
+                    <p>
+                        Le choix de l'immobilier fait référence à ce que vous allez publier, faite un choix adéquat.
+                    </p>
+
+                </div><!-- /.span8 -->
+            </div><!-- /.row -->
+        </div>
+        <div class="container ">
+            <div class="row ">
+                <div class="" style="//padding-right: auto; padding-left: auto">
+                    <div class="span3 bg-white">
+                        <a class="immo padding-5 " href="{{path('annonce_appart_new')}}">
+                            <img class="thumbnail centrer" src="{{asset('img/maison.jpg')}}" width="100"/>
+                            <h4 class="title text-center fg-black">Annonce Appartement</h4>
+                        </a>
+                    </div>
+                    <div class="span3 bg-white ">
+                        <a class="immo padding-5" href="{{path('annonce_maison_new')}}">
+                            <img class="thumbnail centrer" src="{{asset('img/home.png')}}" width="100"/>
+                            <h4 class="title text-center fg-black"> Annonce Maison </h4>
+                        </a>
+                    </div>
+
+                    <div class="span3 bg-white">
+                        <a class="immo padding-5"  href="{{path('annonce_terrain_new')}}">
+                            <img class="thumbnail centrer" src="{{asset('img/terrain.jpg')}}" width="100"/>
+                            <h4 class="title text-center fg-black">Annonce Terrain</h4>
+                        </a>
+                    </div>
+                    <div class="span3 bg-white">
+                        <a class="immo padding-5" href="{{path('annonce_local_new')}}">
+                            <img class="thumbnail centrer" src="{{asset('img/local.jpg')}}" width="100"/>
+                           <h4 class="title text-center fg-black">Annonce local commercial</h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%endblock%}

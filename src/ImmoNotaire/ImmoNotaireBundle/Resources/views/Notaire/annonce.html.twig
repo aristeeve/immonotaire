@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+{%block title%}
+    Publication personnel
+{%endblock%}
+
+{% block body %}
+    <div class="wrapper" style="margin-top: 15px;">
+        <div class="row">
+            <div class="span9">
+                <h1 class="page-header">Publication de Maitre {{notaire.name|upper}}</h1>
+                {%if publication is empty%}
+                    <h3 class="fg-grayLight"><i>Aucun publication</i></h3>
+                {%else%}
+                    <div class="properties-grid">
+                        <div class="row">
+                            {%for post in publication%}
+                                <div class="property span3">
+                                    <div class="image">
+                                        <div class="content">
+                                            <a href="{{path('immo_annonce_detail',{'annonce':post.id})}}"></a>
+                                            <img src="{{asset('upload/image/')}}{{post.media.file}}" alt="" style="height: 200px;">
+                                        </div><!-- /.content -->
+
+                                        <div class="price text-center">{{post.prix|abs|number_format(0,'','.')}} Fcfa</div><!-- /.price -->
+                                        <!-- /.reduced <div class="reduced">Reduced </div>-->
+                                    </div><!-- /.image -->
+
+                                    <div class="title">
+                                        <h2><a href="{{path('immo_annonce_detail',{'annonce':post.id})}}">{{post.titre}}</a></h2>
+                                    </div><!-- /.title -->
+
+                                    <div class="location">{{post.ville}}</div><!-- /.location -->
+                                </div><!-- /.property -->
+                            {%endfor%}
+                        </div><!-- /.row -->
+                    </div><!-- /.properties-grid -->
+                {%endif%}
+            </div>
+            <div class="span3">
+                <div style="margin-top:15px;"> 
+                    {%for pub in pubs%}
+                        {%if pub.name == "user-sidebar-big"%}
+                            {{pub.content|raw}}
+                        {%endif%}
+                    {%endfor%}
+                </div>
+                <div style="margin-top:15px;">
+                    {%for pub in pubs%}
+                        {%if pub.name == "user-sidebar-small"%}
+                            {{pub.content|raw}}
+                        {%endif%}
+                    {%endfor%}
+
+                </div>
+            </div>
+        </div>
+        <div class="pagination pagination-centered">
+            {{ knp_pagination_render(publication) }}
+        </div>
+    </div>
+{%endblock%}

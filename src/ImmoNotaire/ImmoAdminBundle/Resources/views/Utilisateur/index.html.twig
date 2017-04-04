@@ -1,0 +1,132 @@
+{%extends 'baseAdmin.html.twig'%}
+{%block title%}Utilisateur{%endblock%}
+{%block js%}
+    <script type="text/javascript" src="{{asset('admin/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/forms/selects/select2.min.js')}}"></script>
+
+    <script type="text/javascript" src="{{asset('admin/js/core/app.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/pages/datatables_basic.js')}}"></script>
+{%endblock%}
+
+{%block header%}
+    <!-- Page header -->
+    <div class="page-header page-header-default">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Accueil</span> - Listes des utilisateurs</h4>
+            </div>
+        </div>
+
+        <div class="breadcrumb-line">
+            <ul class="breadcrumb">
+                <li><a href="{{path('immo_admin_homepage')}}"><i class="icon-home2 position-left"></i> Accueil</a></li>
+                <li class="active">Liste des utilisateurs</li>
+            </ul>
+        </div>
+    </div>
+{%endblock%}
+
+{%block body%}
+    {%for message in app.session.flashbag.get('info')%}
+
+        <div class="alert alert-info">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        </div>
+
+    {%endfor%}
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">Liste des utilisateurs</h5>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="collapse"></a></li>
+                    <li><a data-action="reload"></a></li>
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+            <a class="btn btn-success pull-right" href="{{path('new_utilisateur')}}"><i class="fa fa-user"></i> Creer un utilisateur</a>
+
+        </div>
+
+        <table class="table datatable-basic">
+            <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>Pseudo</th>
+                    <th>Etude</th>
+                    <th>Statut</th>
+                    <th>Role</th>
+                    <th colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for utilisateur in utilisateurs%}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td><a href="#">{{utilisateur.username}}</a></td>
+                        <td>{{utilisateur.etude}}</td>
+                        <td>
+                            {%if utilisateur.enabled%}
+                                <span class="label label-success">Activé</span>
+                            {%else%}
+                                <span class="label label-danger">Désactivé</span>
+                            {%endif%}
+                        </td>
+                        <td>
+                            {%if utilisateur.roles.0=="ROLE_ADMIN"%}
+                                <span >Administrateur</span>
+                            {%else%}
+                                <span >Notaire</span>
+                            {%endif%}
+                        </td>
+                        <td class="">
+                            <div class="row">
+                                <div class="col-md-3">
+
+                                    {%if utilisateur.roles.0=="ROLE_ADMIN"%}
+                                        <a href="{{path('remove_role_admin',{'id':utilisateur.id})}}" class=" btn btn-success" title='Retirer le role Administrateur'>
+                                            <i class="fa fa-star-half" ></i>
+                                        </a>
+                                    {%else%}
+                                        <a href="{{path('add_role_admin',{'id':utilisateur.id})}}" class=" btn btn-success" title='attribuer le role Administrateur'>
+                                            <i class="fa fa-star" ></i>
+                                        </a>
+                                    {%endif%}
+
+                                </div>
+                                <div class="col-md-3">
+                                    {%if utilisateur.enabled%}
+                                        <a href="{{path('immo_admin_utilisateur_desactivate',{'id':utilisateur.id})}}" class="btn btn-primary" title='Desactiver utilisateur'>
+                                            <i class="fa fa-close"></i>
+                                        </a>
+                                    {%else%}
+                                        <a href="{{path('immo_admin_utilisateur_activate',{'id':utilisateur.id})}}"  class="btn btn-primary" title='Activer utilisateur'>
+                                            <i class="fa fa-check"></i>
+                                        </a>
+                                    {%endif%}
+                                </div>
+                                <div class="col-md-3">
+
+                                    <a class=" btn bg-warning-600" href="{{path('edit_utilisateur',{'id':utilisateur.id})}}">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <a class="btn bg-blue-400" href="{{path('visualiser_utilisateur',{'utilisateur':utilisateur.id})}}">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+
+
+{%endblock%}

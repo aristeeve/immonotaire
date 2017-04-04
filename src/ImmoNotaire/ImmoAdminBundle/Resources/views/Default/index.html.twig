@@ -1,0 +1,158 @@
+{%extends 'baseAdmin.html.twig'%}
+{%block title%}Tableau de bord{%endblock%}
+{%block js%}
+    <script type="text/javascript" src="{{asset('admin/js/plugins/visualization/d3/d3.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/visualization/d3/d3_tooltip.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/forms/styling/switchery.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/forms/styling/uniform.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/forms/selects/bootstrap_multiselect.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/ui/moment/moment.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/pickers/daterangepicker.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+    <script type="text/javascript" src="assets/js/plugins/notifications/bootbox.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/notifications/sweet_alert.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/forms/selects/select2.min.js"></script>
+
+    <script type="text/javascript" src="assets/js/core/app.js"></script>
+    <script type="text/javascript" src="assets/js/pages/components_modals.js"></script>
+    <script type="text/javascript" src="{{asset('admin/js/core/app.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/pages/dashboard.js')}}"></script>
+{%endblock%}
+{%block header%}
+    <!-- Page header -->
+    <div class="page-header page-header-default">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Accueil</span> - Tableau de bord</h4>
+            </div>
+        </div>
+
+        <div class="breadcrumb-line">
+            <ul class="breadcrumb">
+                <li><a href="index.html"><i class="icon-home2 position-left"></i> Accueil</a></li>
+                <li class="active">Tableau de bord</li>
+            </ul>
+        </div>
+    </div>
+{%endblock%}
+
+{%block body%}
+
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="panel panel-flat">
+                <div class="row">
+                    <a href="{{path('immo_admin_utilisateur')}}">
+                        <div class="col-lg-6">
+                            <div class="" style="padding: 10px;">
+                                <img src="{{asset('img/user.png')}}" width="100"/>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <h3>Utilisateurs</h3>
+                            <h1>{{users}}</h1>
+                        </div>
+                    </a>
+                </div> 
+            </div>
+        </div>
+        <div class="col-lg-3 ">
+            <div class="panel panel-flat">
+                <div class="row">
+                    <a href="{{path('immo_admin_annonce')}}">
+                        <div class="col-lg-6 ">
+                            <div class="" style="padding: 10px;">
+                                <img src="{{asset('img/0.png')}}" width="100"/>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <h3>Annonces</h3>
+                            <h1>{{nbreAnnonce}}</h1>
+                        </div>
+                    </a>
+                </div>           
+            </div>
+        </div>
+        <div class="col-lg-3 ">
+            <div class="panel panel-flat">
+                <div class="row">
+                    <div class="col-lg-6 ">
+                        <div class="" style="padding: 10px;">
+                            <img src="{{asset('img/8.png')}}" width="100"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <h3>Archivé</h3>
+                        <h1>{{AnnonceArchiver}}</h1>
+                    </div>
+                </div>           
+            </div>
+        </div>
+        <div class="col-lg-3 ">
+            <div class="panel panel-flat">
+                <div class="row">
+                    <div class="col-lg-6 ">
+                        <div class="" style="padding: 10px;">
+                            <img src="{{asset('img/delete.png')}}" width="100"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <h3>Supprimé</h3>
+                        <h1>{{AnnonceSupprimer}}</h1>
+                    </div>
+                </div>           
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h6 class="panel-title">Annonces recemment publiées</h6>
+                    <div class="heading-elements">
+                        <span class="label bg-success heading-text">{%if nbreAnnonce < 8%}{{nbreAnnonce}} annonces{%else%} 8 annonces{%endif%}</span>
+                        <ul class="icons-list">
+                            <li><a data-action="collapse"></a></li>
+                            <li><a data-action="reload"></a></li>
+                            <li><a data-action="close"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        {%if derniereAnnonce%}
+                            <thead>
+                            <th>Titre</th>
+                            <th>Etude</th>
+                            <th>Immobiliés</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                            </thead>
+                            <tbody>
+                                {%for last in derniereAnnonce|reverse|slice(0, 8)%}
+                                    <tr>
+                                        <td>{{last.titre}}</td>
+                                        <td>{{last.user.etude}}</td>
+                                        <td>{{last.typebiens.nom}}</td>
+                                        <td>{{last.creele|date('d-m-Y')}}</td>
+                                        <td>
+                                            <a class="btn btn-info">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+
+                                            <a title="modifier" class="btn btn-warning">
+                                                <i  class="fa fa-edit"></i>
+                                            </a>
+
+                                        </td>
+                                    </tr>
+                                {%endfor%}
+                            </tbody>
+                        {%endif%}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{%endblock%}

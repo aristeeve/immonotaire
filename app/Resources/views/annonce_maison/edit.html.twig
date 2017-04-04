@@ -1,0 +1,443 @@
+{% extends 'base.html.twig' %}
+{%block title%}
+    Modification de l'annonce maison
+{%endblock%}
+{% block body %}
+    <div class="list-your-property-form">
+        <h2 class="page-header">Modifiez votre annonce </h2>
+
+        <div class="content">
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="span4">
+                    <h2><b>1.</b> Informations générales</h2>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Titre
+                            <span class="form-required" title="This field is required.">*</span>
+                        </label>
+                        <span class="fg-red">{{form_errors(form.annonce.titre)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.annonce.titre)}}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Type de transaction
+                            <span class="form-required" title="This field is required.">*</span>
+                        </label>
+                        <span class="fg-red">{{form_errors(form.annonce.type_annonce)}}</span>
+                        <div class="controls">
+                            {{ form_widget(form.annonce.type_annonce) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Prix
+                            <span class="form-required" title="This field is required.">*</span>
+                        </label>
+                        <span class="fg-red">{{form_errors(form.annonce.prix)}}</span>
+                        <div class="controls">
+                            {{ form_widget(form.annonce.prix) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Modèle
+                            <span class="form-required" title="This field is required.">*</span>
+                        </label>
+                        <span class="fg-red">{{form_errors(form.type_maison)}}</span>
+                        <div class="controls">
+                            {{ form_widget(form.type_maison,{'placeholder':'choisissez le modèle'}) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Disponible à partir de
+
+                        </label>
+                        <span class="fg-red">{{form_errors(form.annonce.disponibilite)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.annonce.disponibilite)}}
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="span4">
+                    <h2><b>2.</b> Details du bien</h2>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Superficie
+                            (m<sup>2</sup>)
+
+                        </label>
+                        <span class="fg-red">{{form_errors(form.superficie)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.superficie)}}
+                        </div>
+                    </div>
+                    <div class=" control-group">
+                        <label class="control-label">
+                            Ville
+                            <span class="form-required" title="This field is required.">*</span>
+                        </label>
+                        <span class="fg-red">{{form_errors(form.annonce.ville) }}</span>
+                        <div class="controls">
+                            {{form_widget(form.annonce.ville,{'placeholder':'Choisir une ville','attr':{'id':'area'}}) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Commune /Quartier
+                            <span class="form-required" title="This field is required.">*</span>
+                        </label>
+
+                        <div class="controls">
+                            {{form_widget(form.annonce.commune)}}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Espace habitable (m<sup>2</sup>)
+
+                        </label>
+                        <span class="fg-red">{{form_errors(form.espace_habitable)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.espace_habitable)}}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Nombre de pièce
+
+                        </label>
+                        <span class="fg-red">{{form_errors(form.piece)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.piece)}}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="span4">
+                    <h2><b>3.</b> Description du bien</h2>
+                    <div class="control-group">
+                        <label class="control-label">
+                            A propos du bien
+
+                        </label>
+                        <span class="fg-red">{{form_errors(form.annonce.description)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.annonce.description)}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span4">
+                    <h2><b>4.</b>Caractéristiques du bien <i>(en chiffre)</i></h2>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Nombre de chambre
+
+                        </label>
+                        <span class="fg-red">{{form_errors(form.chambre)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.chambre)}}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Salle de bain
+
+                        </label>
+                        <span class="fg-red">{{form_errors(form.salle_bain)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.salle_bain)}}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Salon
+
+                        </label>
+                        <span class="fg-red">{{form_errors(form.salon)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.salon)}}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            etage
+                        </label>
+                        <span class="fg-red">{{form_errors(form.etage)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.etage)}}
+                        </div>
+                    </div>
+                </div>
+                <div class="span4" style="padding-top: 120px;">
+                    <div class="control-group">
+                        <label class="control-label">
+                            positon à l'étage
+                        </label>
+                        <span class="fg-red"> {{form_errors(form.niveau_etage)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.niveau_etage)}}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Année de construction
+                        </label>
+                        <span class="fg-red">{{form_errors(form.annee)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.annee)}}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            meuble
+                        </label>
+                        <span class="fg-red">{{form_errors(form.meuble)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.meuble,{'placeholder':'Votre maison est-elle meublée ?'})}}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            place de parking
+                        </label>
+                        <span class="fg-red"> {{form_errors(form.place_parking)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.place_parking)}}
+                        </div>
+                    </div>
+                </div>
+                <div class="span4">
+                    <h2><b>5.</b>Caractéristique spécial</h2>
+                    <div class="control-group property-type">
+                        {{form_widget(form.chauffe_eau)}}
+                        <label class="control-label">
+                            Chauffe eau
+                        </label>
+                    </div>
+                    <div class="control-group property-type">
+                        {{form_widget(form.balcon)}}
+                        <label class="control-label">
+                            Balcon
+                        </label>
+                    </div>
+                    <div class="control-group property-type">
+                        {{form_widget(form.cour)}}
+                        <label class="control-label">
+                            Cour
+                        </label>
+                    </div>
+                    <div class="control-group property-type">
+                        {{form_widget(form.piscine)}}
+                        <label class="control-label">
+                            Piscine
+                        </label>
+                    </div>
+                    <div class="control-group property-type">
+                        {{form_widget(form.jardin)}}
+                        <label class="control-label">
+                            Jardin
+                        </label>
+                    </div>
+                    <div class="control-group property-type">
+                        {{form_widget(form.garage)}}
+                        <label class="control-label">
+                            garage
+                        </label>
+                    </div>
+                    <div class="control-group property-type">
+                        {{form_widget(form.parking)}}
+                        <label class="control-label">
+                            Parking
+                        </label>
+                    </div>
+                    <div class="control-group property-type">
+                        {{form_widget(form.ascenseur)}}
+                        <label class="control-label">
+                            Ascenseur
+                        </label>
+                    </div>
+                    <div class="control-group property-type">
+                        {{form_widget(form.gardiennage)}}
+                        <label class="control-label">
+                            Gardiennage
+                        </label>
+                    </div>
+                    <div class="control-group property-type">
+                        {{form_widget(form.systeme_alarme)}}
+                        <label class="control-label">
+                            Système d'alarme
+                        </label>
+                    </div>
+                    <div class="control-group property-type">
+                        {{form_widget(form.vue_lagune)}}
+                        <label class="control-label">
+                            Vue lagune
+                        </label>
+                    </div>
+                    <div class="control-group property-type">
+                        {{form_widget(form.vue_mer)}}
+                        <label class="control-label">
+                            Vue mer
+                        </label>
+                    </div>
+                    <div class="control-group property-type">
+                        {{form_widget(form.interphone)}}
+                        <label class="control-label">
+                            Interphone
+                        </label>
+                    </div>
+                    <div class="control-group property-type">
+                        {{form_widget(form.bordure_route)}}
+                        <label class="control-label">
+                            Bordure route
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span4">
+                    <h2 class=""><b>4.</b>Vos images</h2>
+                    <div class="row">
+                        {%set img =annonce_maison.annonce.media%}
+                        <!--image1-->
+                        {%if img.file%}
+                            <div class="padding-5 border-solid border-2" id="f" style=" background-image: url('{{asset('upload/image/'~img.file)}}');">
+                                <i class="fa fa-close fg-black del bg-white" style="cursor: pointer"></i>
+                            </div>
+                            <input type="hidden" class="file" name="file" value="{{img.file}}"/>
+                        {%endif%}
+                        <div>
+                            <label>Photo 1</label>
+                            {{ form_row(form.annonce.media.file) }}
+                        </div>
+                        <!--fin image1-->
+                        <!--image2-->
+                        {%if img.file1%}
+                            <div class="padding-5 border-solid border-2" id="f1" style="background-image: url('{{asset('upload/image/'~img.file1)}}'); ">
+                                <i class="fa fa-close fg-black del bg-white" style="cursor: pointer"></i>
+                            </div>
+                            <input type="hidden" class="file1" name="file1" value="{{img.file1}}"/>
+                        {%endif%}
+                        <div>
+                            <label>Photo 2</label>
+                            {{ form_row(form.annonce.media.file1) }}
+                        </div>
+                        <!--fin image2-->
+                        <!--image3-->
+                        {%if img.file2%}
+                            <div class="padding-5 border-solid border-2" id="f2" style="background-image: url('{{asset('upload/image/'~img.file2)}}'); ">
+                                <i class="fa fa-close fg-black del bg-white" style="cursor: pointer"></i>
+                            </div>
+                            <input type="hidden" class="file2" name="file2" value="{{img.file2}}"/>
+                        {%endif%}
+                        <div>
+                            <label>Photo 3</label>
+                            {{ form_row(form.annonce.media.file2) }}
+                        </div>
+                        <!--fin image3-->
+                        <!--image4-->
+                        {%if img.file3%}
+                            <div class="padding-5 border-solid border-2" id="f3" style="background-image: url('{{asset('upload/image/'~img.file3)}}'); ">
+                                <i class="fa fa-close fg-black del bg-white" style="cursor: pointer"></i>
+                            </div>
+                            <input type="hidden" class="file3" name="file3" value="{{img.file3}}"/>
+                        {%endif%}
+                        <div>
+                            <label>Photo 4</label>
+                            {{ form_row(form.annonce.media.file3) }}
+                        </div>
+                        <!--fin image4-->
+                        <!--image5-->
+                        {%if img.file4%}
+                            <div class="padding-5 border-solid border-2" id="f4" style="background-image: url('{{asset('upload/image/'~img.file4)}}'); ">
+                                <i class="fa fa-close fg-black del bg-white" style="cursor: pointer"></i>
+                            </div>
+                            <input type="hidden" class="file4" name="file4" value="{{img.file4}}"/>
+                        {%endif%}
+                        <div>
+                            <label>Photo 5</label>
+                            {{ form_row(form.annonce.media.file4) }}
+                        </div>
+                        <!--fin image5-->
+                        <style>
+                            #f,#f1,#f2,#f3,#f4{
+                                background-repeat: no-repeat;
+                                background-size: 110px 100px; 
+                                border-radius:5px 5px 5px 5px; 
+                                width: 25%;
+                                height: 90px; 
+                            }
+                        </style>
+                    </div>
+
+                </div>
+                <div class="span4">
+                    <h2><b>5.</b>Vos contacts</h2>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Téléphone portable
+                            <span class="form-required" title="This field is required.">*</span>
+                        </label>
+                        <span class="fg-red">{{form_errors(form.annonce.telMobile)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.annonce.telMobile)}}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Téléphone fixe
+                            <span class="form-required" title="This field is required.">*</span>
+                        </label>
+                        <span class="fg-red">  {{form_errors(form.annonce.telFixe)}}</span>
+                        <div class="controls">
+                            {{form_widget(form.annonce.telFixe)}}
+                        </div>
+                    </div>
+                </div>
+                <div class="span4">
+                    <h2><b>6.</b>Sauvegarder / Publier</h2>
+                    <div class="control-group">
+                        {{form_widget(form.annonce.active)}}
+                        <label class="control-label">
+                            Voulez-vous publiez l'annonce ?
+                        </label>
+                    </div>
+                    <div class="control-group">
+                        {{form_widget(form.annonce.affiche_contact)}}
+                        <label class="control-label">
+                            Voulez vous affichez vos contacts ?
+                        </label>
+                    </div>
+
+                    <div class="control-group padding-top-20">
+                        <div class="form-group">
+                            <div class="padding-top-20">
+                                <input id="submit" type="submit" value="Sauvegarder / Publier l'annonce" class=" btn btn-danger btn-large">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+
+
+{% endblock %}
+{%block javascripts%}
+    <script>
+
+    </script>
+{% endblock%}
+
+
+

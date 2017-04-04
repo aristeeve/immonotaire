@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Annonce_locals list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Superficie</th>
+                <th>Espace_habitable</th>
+                <th>Piece</th>
+                <th>Etage</th>
+                <th>Niveau_etage</th>
+                <th>Annee</th>
+                <th>Meuble</th>
+                <th>Place_parking</th>
+                <th>Interphone</th>
+                <th>Chauffe_eau</th>
+                <th>Balcon</th>
+                <th>Cour</th>
+                <th>Piscine</th>
+                <th>Jardin</th>
+                <th>Garage</th>
+                <th>Parking</th>
+                <th>Ascenseur</th>
+                <th>Gardiennage</th>
+                <th>Systeme_alarme</th>
+                <th>Bordure_route</th>
+                <th>Vue_lagune</th>
+                <th>Vue_mer</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for annonce_local in annonce_locals %}
+            <tr>
+                <td><a href="{{ path('annonce_local_show', { 'id': annonce_local.id }) }}">{{ annonce_local.id }}</a></td>
+                <td>{{ annonce_local.superficie }}</td>
+                <td>{{ annonce_local.espacehabitable }}</td>
+                <td>{{ annonce_local.piece }}</td>
+                <td>{{ annonce_local.etage }}</td>
+                <td>{{ annonce_local.niveauetage }}</td>
+                <td>{{ annonce_local.annee }}</td>
+                <td>{{ annonce_local.meuble }}</td>
+                <td>{{ annonce_local.placeparking }}</td>
+                <td>{% if annonce_local.interphone %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_local.chauffeeau %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_local.balcon %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_local.cour %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_local.piscine %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_local.jardin %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_local.garage %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_local.parking %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_local.ascenseur %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_local.gardiennage %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_local.systemealarme %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_local.bordureroute %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_local.vuelagune %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonce_local.vuemer %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('annonce_local_show', { 'id': annonce_local.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('annonce_local_edit', { 'id': annonce_local.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('annonce_local_new') }}">Create a new annonce_local</a>
+        </li>
+    </ul>
+{% endblock %}

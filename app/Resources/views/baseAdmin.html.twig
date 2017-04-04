@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{%block title%}{%endblock%}</title>
+
+        <!-- Global stylesheets -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+        <link href="{{asset('admin/css/icons/icomoon/styles.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('admin/css/bootstrap.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('admin/css/core.css')}}" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{{ asset('assets/css/common.css') }}" type="text/css" id="color-variant-default">
+        <link href="{{asset('admin/css/components.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('admin/css/colors.css')}}" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}" type="text/css" id="color-variant-default">
+        <!-- /global stylesheets -->
+
+        <!-- Core JS files -->
+        <script type="text/javascript" src="{{asset('admin/js/plugins/loaders/pace.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('admin/js/core/libraries/jquery.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('admin/js/core/libraries/bootstrap.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('admin/js/plugins/loaders/blockui.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('admin/js/main.js')}}"></script>
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+        <!-- /core JS files -->
+
+        <!-- Theme JS files -->
+    {% block js%}{%endblock%}
+    <!-- /theme JS files -->
+    <script>
+        $(function () {
+            $('.datatable-basic').DataTable({
+                autoWidth: false,
+                dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
+                language: {
+                    search: '<span>Filter:</span> _INPUT_',
+                    lengthMenu: '<span>Show:</span> _MENU_',
+                    paginate: {'first': 'First', 'last': 'Last', 'next': '→', 'previous': '←'}
+                },
+                drawCallback: function () {
+                    $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').addClass('dropup');
+                },
+                preDrawCallback: function () {
+                    $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').removeClass('dropup');
+                }
+            });
+
+
+        });
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Main navbar -->
+    <div class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{path('immo_admin_homepage')}}">Immo-notaire</a>
+
+            <ul class="nav navbar-nav visible-xs-block">
+                <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+                <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-collapse collapse" id="navbar-mobile">
+            <ul class="nav navbar-nav">
+                <li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-bubble-notification"></i>
+                        <span class="visible-xs-inline-block position-right">Activité récentes</span>
+                        <span class="badge bg-warning-400" id="nombreNotif">{%if notif%}{{notif|length}}{%endif%}</span>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-content">
+                        <div class="dropdown-content-heading">
+                            Activités récentes
+                            <ul class="icons-list">
+                                <li><a href="#"><i class="icon-sync"></i></a></li>
+                            </ul>
+                        </div>
+
+                        <ul class="media-list dropdown-content-body width-350">
+                            {%if notif%}
+                                {%for elt in notif|reverse|slice(0, 7)%}
+                                    <li class="media">
+                                        <div class="media-left">
+                                            <a href="#" class="btn border-primary text-primary btn-flat btn-rounded btn-icon btn-sm"><i class="icon-envelope"></i></a>
+                                        </div>
+
+                                        <div class="media-body">
+                                            {{elt.action|capitalize}} {{elt.type|capitalize}}
+                                            <div class="media-annotation">{{elt.date.date|date('d-m-Y')}} à {{elt.date.date|date('H:i')}}</div>
+                                        </div>
+                                    </li>
+                                {%endfor%}
+                            {%endif%}
+
+                        </ul>
+
+                        <div class="dropdown-content-footer">
+                            <a href="{{path('list-notification')}}" data-popup="tooltip" title="Voir toutes les notifications"><i class="icon-menu display-block"></i></a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="{{path('immo_annonce_homepage')}}">Se connecter en tant que notaire</a>
+                </li>
+                <li class="dropdown dropdown-user">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        
+                        {%if user is defined%}
+                            {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                                <span>{{user.username}}</span>
+                                <i class="caret"></i>
+                            {%endif%}
+                        {%endif%}
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="{{path('immo_admin_visualiser',{'id':user.id})}}"><i class="icon-user-plus"></i> My profile</a></li>
+                        <li><a href="#"><i class="icon-coins"></i> My balance</a></li>
+                        <li><a href="#"><span class="badge bg-teal-400 pull-right">{%if notif is defined%}{{notif|length}}{%endif%}</span> <i class="icon-bubble-notification"></i> Notifications</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{{path('immo_notaire_self_annonce_archive')}}"><i class="icon-cog5"></i> Changer de privilège</a></li>
+                        <li><a href="{{path('fos_user_security_logout')}}"><i class="icon-switch2"></i> Logout</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <!-- /main navbar -->
+
+
+    <!-- Page container -->
+    <div class="page-container">
+
+        <!-- Page content -->
+        <div class="page-content">
+
+            <!-- Main sidebar -->
+            <div class="sidebar sidebar-main">
+                <div class="sidebar-content">
+
+                    <!-- User menu -->
+
+                    <!-- /user menu -->
+
+
+                    <!-- Main navigation -->
+                    <div class="sidebar-category sidebar-category-visible">
+                        <div class="category-content no-padding">
+                            <ul class="navigation navigation-main navigation-accordion">
+
+                                <!-- Main -->
+                                <li class="navigation-header"><span>MENU</span> <i class="icon-menu" title="Main pages"></i></li>
+                                <label class="sujet" style="display: none;">{%if val%}{{val}}{%endif%}</label>
+                                <li><a href="{{path('immo_admin_homepage')}}" id="bord"><i class="icon-home4"></i> <span>Tableau de bord</span></a></li>
+                                <li>
+                                    <a href="{{path('immo_admin_utilisateur')}}" id="user"><i class="icon-user"></i> <span>Utilisateurs</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{path('immo_admin_annonce')}}" id="annonce"><i class="icon-megaphone"></i> <span>Annonces</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{path('list_newsletter')}}" id="newsletter"><i class="icon-envelope"></i> <span>Newsletters</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{path('list-partenaire')}}" id="partenaire"><i class="icon-users"></i> <span>Partenaires</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{path('list-notification')}}" id="notif"><i class="icon-bubble-notification"></i> <span>Notifications</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{path('list_photo')}}" id="galerie"><i class="icon-image4"></i> <span>Galerie</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{path('list_pub')}}" id="publicite"><i class="icon-file-picture2"></i> <span>Publicité</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /main navigation -->
+
+                </div>
+            </div>
+            <!-- /main sidebar -->
+
+
+            <!-- Main content -->
+            <div class="content-wrapper">
+
+                <!-- Page header -->
+            {%block header%}{%endblock%}
+            <!-- /page header -->
+
+
+            <!-- Content area -->
+            <div class="content">
+            {%block body%}{%endblock%}
+
+            <div class="footer text-muted">
+                &copy; 2015. <a href="#">Limitless Web App Kit</a> by <a href="http://themeforest.net/user/Kopyov" target="_blank">Eugene Kopyov</a>
+            </div>
+            <!-- /footer -->
+        </div>
+        <!-- /content area -->
+    </div>
+    <!-- /main content -->
+</div>
+<!-- /page content -->
+</div>
+<!-- /page container -->
+</body>
+</html>

@@ -1,0 +1,234 @@
+{% extends 'base.html.twig' %}
+{%block title%}
+    Site officiel de l'Immobilier Notaire de Cote d'Ivoire
+{%endblock%}
+{% block body %}
+    <div id="content">
+        <div class="container">
+            <div id="main">
+                <div class="row">
+                    <div class="span9">
+                        <div class="">
+                            <h2 class="page-header">
+                                {% if recherches|length >1%}
+                                    <i>({{recherches|length}})Résultats obtenus</i>
+                                {%endif%}
+                                {%if recherches|length == 1%}
+                                    <i>({{recherches|length}})Résultat obtenus</i>
+                                {%endif%}
+                                {%if recherches is empty  %}
+                                    <i class="fg-grayLight">Aucun Résultat obtenus</i>
+                                {%endif%}
+                            </h2>
+                            <ul class="breadcrumb">
+                                {%if app.request.get('statut')%}
+                                    <li>
+                                        <a>{{app.request.get('statut')}}</a> <span class="divider">/</span>
+                                    </li>
+                                {%endif%}
+                                {%if app.request.get('ville')%}
+                                    <li>
+                                        <a>{{app.request.get('ville')}}</a> <span class="divider">/</span>
+                                    </li>
+                                {%else%}
+                                    <li>
+                                        <a>Toutes les villes</a> <span class="divider">/</span>
+                                    </li>
+                                {%endif%}
+                                {%if app.request.get('type_biens')%}
+                                    <li>
+                                        <a>{{app.request.get('type_biens')}}</a> <span class="divider">/</span>
+                                    </li>
+                                    {%if app.request.get('modeleAppart')%}
+                                        <li>
+                                            <a>{{app.request.get('modeleAppart')}}</a> 
+                                        </li>
+                                    {%endif%}
+                                    {%if app.request.get('modeleMaison')%}
+                                        <li>
+                                            <a>{{app.request.get('modeleAppart')}}</a> 
+                                        </li>
+                                    {%endif%}
+                                    {%if app.request.get('modeleTerrain')%}
+                                        <li>
+                                            <a>{{app.request.get('modeleAppart')}}</a> 
+                                        </li>
+                                    {%endif%}
+                                    {%if app.request.get('modeleLocal')%}
+                                        <li>
+                                            <a>{{app.request.get('modeleLocal')}}</a> 
+                                        </li>
+                                    {%endif%}
+                                {%else%}
+                                    <li>
+                                        <a>Toutes types de biens</a>
+                                    </li>
+                                {%endif%}
+                            </ul>
+                        </div>
+                        <div class="properties-rows">
+                            <div class="filter">
+                                <form action="?" method="get" class="form-horizontal">
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputSortBy">
+                                            Sort by
+                                            <span class="form-required" title="This field is required.">*</span>
+                                        </label>
+                                        <div class="controls">
+                                            <select id="inputSortBy">
+                                                <option id="price">Price</option>
+                                                <option id="published">Published</option>
+                                            </select>
+                                        </div><!-- /.controls -->
+                                    </div><!-- /.control-group -->
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputOrder">
+                                            Order
+                                            <span class="form-required" title="This field is required.">*</span>
+                                        </label>
+                                        <div class="controls">
+                                            <select id="inputOrder">
+                                                <option id="asc">ASC</option>
+                                                <option id="desc">DESC</option>
+                                            </select>
+                                        </div><!-- /.controls -->
+                                    </div><!-- /.control-group -->
+                                </form>
+                            </div><!-- /.filter -->
+                        </div><!-- /.properties-rows -->
+                        {%if recherches is not empty  %}
+                            <div class="properties-rows">
+                                <div class="row">
+                                    {%for recherche in page %}
+                                        {%if recherche.annonce is defined%}
+                                            <div class="property span9">
+                                                <div class="row">
+                                                    <div class="image span3">
+                                                        <div class="content">
+                                                            <a href="{{path('immo_annonce_detail',{'annonce':recherche.annonce.id})}}"></a>
+                                                            {%if recherche.annonce.media.file is empty%}
+                                                                {%if recherche.annonce.media.file1 is empty%}
+                                                                    {%if recherche.annonce.media.file2 is empty%}
+                                                                        {%if recherche.annonce.media.file3 is empty%}
+                                                                            {%if recherche.annonce.media.file4 is empty%}
+                                                                                <img src="{{asset('upload/image/default.png')}}" class="thumbnail" alt="" style="width: 260px; ">
+
+                                                                            {%endif%}
+                                                                            <img src="{{asset('upload/image/')}}{{recherche.annonce.media.file4}}" class="thumbnail" alt="{{recherche.annonce.titre|capitalize}} à {{recherche.annonce.ville}},{{recherche.annonce.commune}}" style="width: 260px; " />
+
+                                                                        {%endif%}
+
+                                                                        <img src="{{asset('upload/image/')}}{{recherche.annonce.media.file3}}" class="thumbnail" alt="{{recherche.annonce.titre|capitalize}} à {{recherche.annonce.ville}},{{recherche.annonce.commune}}" style="width: 260px; " />
+                                                                    {%endif%}
+
+                                                                    <img src="{{asset('upload/image/')}}{{recherche.annonce.media.file2}}" class="thumbnail" alt="{{recherche.annonce.titre|capitalize}} à {{recherche.annonce.ville}},{{recherche.annonce.commune}}"style="width: 260px; " />
+
+                                                                {%endif%}
+
+                                                                <img src="{{asset('upload/image/')}}{{recherche.annonce.media.file1}}" class="thumbnail" alt="{{recherche.annonce.titre|capitalize}} à {{recherche.annonce.ville}},{{recherche.annonce.commune}}" style="width: 260px; " />
+
+                                                            {%else%}
+
+                                                                <img src="{{asset('upload/image/')}}{{recherche.annonce.media.file}}" class="thumbnail" alt="{{recherche.annonce.titre|capitalize}} à {{recherche.annonce.ville}},{{recherche.annonce.commune}}" style="width: 260px; " />
+
+                                                            {%endif%}
+
+                                                        </div><!-- /.content -->
+                                                    </div><!-- /.image -->
+
+                                                    <div class="body span6">
+                                                        <div class="title-price row">
+                                                            <div class="title span4">
+                                                                <h2><a id="detail" href="{{path('immo_annonce_detail',{'annonce':recherche.annonce.id})}}">{{recherche.annonce.titre|capitalize}}</a></h2>
+                                                            </div><!-- /.title -->
+
+                                                            <div class="price">
+                                                                {%if recherche.annonce.prix%}
+                                                                    {{recherche.annonce.prix|number_format(0,'','.')}} Fcfa
+                                                                {%endif%}
+                                                            </div><!-- /.price -->
+                                                        </div><!-- /.title -->
+
+                                                        <div class="location"><i>Localisation</i>: {%if recherche.annonce.ville is empty%}none{%else%}{{recherche.annonce.ville |capitalize}}{%endif%}</div><!-- /.location -->
+                                                        {%if recherche.annonce.description%}
+                                                            <p>{{recherche.annonce.description}}</p>
+                                                        {%else%}
+                                                            <p>Etiam at ante id enim dictum posuere id vel est. Praesent at massa quis risus cursus tristique vel non orci. Phasellus ut nisi non odio</p>
+                                                        {%endif%}
+                                                        <div class="area">
+                                                            {%if recherche.superficie is not empty%}
+                                                                <span class="key">Superficie:</span><!-- /.key -->
+                                                                <span class="value">
+                                                                    {{recherche.superficie}}  m<sup>2</sup>
+                                                                </span>
+                                                            {%endif%}
+                                                            <!-- /.value -->
+                                                        </div><!-- /.area -->
+                                                        {%if recherche.chambre is defined%}
+                                                            <div class="bedrooms">
+                                                                <div class="content">{{recherche.chambre}}</div>
+                                                            </div><!-- /.bedrooms -->
+                                                        {%endif%}
+                                                        {%if recherche.sallebain is defined%}
+                                                            <div class="bathrooms">
+                                                                <div class="content">{{recherche.sallebain}}</div>  
+                                                            </div><!-- /.body -->
+                                                        {%endif%}
+                                                    </div><!-- /.property -->
+                                                </div>
+                                            </div>
+                                        {%else%}
+                                            <div class="property span9">
+                                                <div class="row">
+                                                    <div class="image span3">
+                                                        <div class="content padding-5">
+                                                            <a href="#"></a>
+                                                            {%if recherche.media%}
+                                                                <img src="{{asset('upload/image/')}}{{recherche.media.file}}" alt="" class="thumbnail">
+                                                            {%else%}
+                                                                <img src="{{asset('img/terrain')}}" alt="" class="thumbnail">
+                                                            {%endif%}
+                                                        </div><!-- /.content -->
+                                                    </div><!-- /.image -->
+
+                                                    <div class="body span6">
+                                                        <div class="title-price row">
+                                                            <div class="title span4">
+                                                                <h2><a id="detail" href="{{path('immo_annonce_detail',{'annonce':recherche.id})}}">{{recherche.titre|capitalize}}</a></h2>
+                                                            </div><!-- /.title -->
+
+                                                            <div class="price">
+                                                                {%if recherche.prix%}
+                                                                    {{recherche.prix|number_format(0,'','.')}} Fcfa
+                                                                {%endif%}
+                                                            </div><!-- /.price -->
+                                                        </div><!-- /.title -->
+
+                                                        <div class="location"><i>Localisation</i>: {%if recherche.ville is empty%}none{%else%}{{recherche.ville |capitalize}}{%endif%}</div><!-- /.location -->
+                                                        {%if recherche.description%}
+                                                            <p>{{recherche.description}}</p>
+                                                        {%else%}
+                                                            <p>Etiam at ante id enim dictum posuere id vel est. Praesent at massa quis risus cursus tristique vel non orci. Phasellus ut nisi non odio</p>
+                                                        {%endif%}
+                                                        <!-- /.bathrooms -->
+                                                    </div><!-- /.body -->
+                                                </div><!-- /.property -->
+                                            </div>
+                                        {%endif%}
+                                    {%endfor%}
+                                </div>
+                            </div>
+                        {%endif%}
+                        {{ knp_pagination_render(page) }}
+                    </div>
+                    <div class="sidebar span3 margin-top-20">
+
+                        {%include 'search.html.twig'%}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock%}

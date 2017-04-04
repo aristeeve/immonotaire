@@ -1,0 +1,56 @@
+immo_annonce_photo:
+    resource: "@ImmoAnnonceBundle/Resources/config/routing/photo.yml"
+    prefix:   /photo
+
+immo_annonce_annonce_local:
+        resource: "@ImmoAnnonceBundle/Resources/config/routing/annonce_local.yml"
+        prefix:   /annonces/annonce_local
+
+immo_annonce_annonce_terrain:
+        resource: "@ImmoAnnonceBundle/Resources/config/routing/annonce_terrain.yml"
+        prefix:    /annonces/annonce_terrain
+        
+immo_annonce_annonce_maison:
+        resource: "@ImmoAnnonceBundle/Resources/config/routing/annonce_maison.yml"
+        prefix:   /annonces/annonce_maison
+        
+immo_annonce_annonce_appart:
+    resource: "@ImmoAnnonceBundle/Resources/config/routing/annonce_appart.yml"
+    prefix:   /annonces/annonce_appart
+
+route_ajax:
+    resource: "@ImmoAnnonceBundle/Resources/config/routing/ajax.yml"
+    prefix:   /annonces/recherche
+
+immo_annonce_recherche:
+    path:     rechercher/
+    defaults: { _controller: ImmoAnnonceBundle:Default:rechercherAnnonce }
+    methods:  [GET, POST]
+
+immo_annonce_detail:
+    path:     /annonce/{annonce}/detail
+    defaults: { _controller: ImmoAnnonceBundle:Default:detailAnnonce }
+
+immo_annonce_mail:
+    path:     envoyer-mail
+    defaults: { _controller: ImmoAnnonceBundle:Default:Envoiemail }
+    methods:  [POST]
+    
+
+immo_annonce_homepage:
+    path:     /
+    defaults: { _controller: ImmoAnnonceBundle:Default:index }
+
+immo_annonce_liste_annonce:
+    path:     /liste-annonces
+    defaults: { _controller: ImmoAnnonceBundle:Default:Liste }
+    
+    
+#page ou l'on choisi quel genre d'annonce on veut publier
+immo_annonce_new:
+    path:     /annonces/choisir/categorie
+    defaults: {_controller: ImmoAnnonceBundle:Annonce:choix }
+    methods:  [GET, POST]
+
+
+

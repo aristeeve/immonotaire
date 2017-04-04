@@ -1,0 +1,146 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="list-your-property-form">
+        <h2 class="page-header">Créer votre annonce</h2>
+
+        <div class="content">
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="span3">
+                    <h2> Information générale</h2>
+                    <div class="control-group">
+                        <label class="control-label">{{ form_label(form.titre) }}</label>
+                        {{form_errors(form.titre)}}
+                        <div class="control">
+                            {{form_widget(form.titre)}}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            {{ form_label(form.type_annonce) }}
+                        </label>
+                        {{form_errors(form.type_annonce)}}
+                        <div class="control">
+                            {{ form_widget(form.type_annonce) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"> 
+                            {{form_label(form.type_biens)}}
+                        </label>
+                        {{form_errors(form.type_biens)}}
+                        <div class="control">
+                            {{form_widget(form.type_biens)}}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            {{form_label(form.description)}}
+                        </div>
+                        {{form_errors(form.description)}}
+                        <div class="control">
+                            {{form_widget(form.description)}}
+                        </div>
+                    </div>
+                </div>
+                <div class="span4 form-group">
+
+                    <h2>Localisation</h2>
+                    <div class="control-group">
+                        <div class="span2"> 
+                            {{form_label(form.region)}}
+                        </div>
+                        {{form_errors(form.region)}}
+                        <div class="span5">
+                            {{form_widget(form.region)}}
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="span2"> 
+                            {{form_label(form.ville)}}
+                        </div>
+                        {{form_errors(form.ville)}}
+                        <div class="span5">
+                            {{form_widget(form.ville)}}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="span2"> 
+                            {{form_label(form.commune)}}
+                        </div>
+                        {{form_errors(form.commune)}}
+                        <div class="span5">
+                            {{form_widget(form.commune)}}
+                        </div>
+                    </div>
+                </div>
+                <div class="span4 form-group">
+                    <h2>Contacts et divers </h2>
+                    <div class="control-group">
+                        <div class="span2"> 
+                            {{form_label(form.telMobile)}}
+                        </div>
+                        {{form_errors(form.telMobile)}}
+                        <div class="span5">
+                            {{form_widget(form.telMobile)}}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="span2"> 
+                            {{form_label(form.telFixe)}}
+                        </div>
+                        {{form_errors(form.telFixe)}}
+                        <div class="span5">
+                            {{form_widget(form.telFixe)}}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="span2"> 
+                            {{form_label(form.prix)}}
+                        </div>
+                        {{form_errors(form.prix)}}
+                        <div class="span5">
+                            {{form_widget(form.prix)}}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="span2"> 
+                            {{form_label(form.disponibilite)}}
+                        </div>
+                        {{form_errors(form.disponibilite)}}
+                        <div class="span5">
+                            {{form_widget(form.disponibilite)}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-horizontal margin-top-20">
+                <div class="span4 control-group margin-top-10">
+                    <div class="span3"> 
+                        Voulez vous publier cette annonce ? &nbsp;&nbsp;              
+                        {{form_widget(form.active)}}
+                    </div>
+                    {{form_errors(form.active)}}
+                </div>
+                <div class=" span4 control-group margin-top-10">
+                    <div class="span3"> 
+                        Voulez vous afficher vos contacts ? &nbsp;&nbsp;
+                        {{form_widget(form.affiche_contact,{'attr':{'class':'ez-hide'}})}}
+                    </div>
+                    {{form_errors(form.affiche_contact)}}
+                </div>
+                <div class=" span4 control-group margin-top-10">
+                    <div class="span3"> 
+                        <input type="submit" class="btn btn-primary arrow-right" value="Passer à la 2e étape" />
+                    </div>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+
+
+{%endblock%}

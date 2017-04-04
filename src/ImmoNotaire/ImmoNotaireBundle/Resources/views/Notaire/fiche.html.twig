@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+{%block title%}
+    Fiche notaire
+{%endblock%}
+
+{% block body %}
+    <div class="row margin-top-20">
+        {%include 'searchNotaire.html.twig'%}
+
+        <div class="span9" style="background-color: #fff;padding-top:10px;padding-bottom:10px;">
+            <div class="content text-center"  style="padding:30px; padding-top: 0px;">
+                <label class="bg-blue text-center">
+                    <h2 class="fg-white">PROFIL NOTAIRE</h2>
+                </label>
+                <img src="{{asset('img/notaires.png')}}" class="thumbnails" width="100"/>
+                <table id="example1" class="table table-bordered table-striped">
+                    <tbody>
+                        <tr>
+                            <th>Nom</th>
+                            <td>{{ notaire.name|capitalize }}</td>
+                        </tr>
+                        <tr>
+                            <th>Prenom</th>
+                            <td>{{ notaire.username|capitalize }}</td>
+                        </tr>
+                        <tr>
+                            <th>Etude de Maitre</th>
+                            <td>{{ notaire.etude|capitalize }}</td>
+                        </tr>
+                        <tr>
+                            <th>Siège</th>
+                            <td>{{notaire.ville|capitalize}}, {{ notaire.siege|capitalize }}</td>
+                        </tr>
+                        <tr>
+                            <th>Personne à contacter</th>
+                            <td>{{ notaire.personneAContacter }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{ notaire.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Portable</th>
+                            <td>{{ notaire.contact }}</td>
+                        </tr>
+                        <tr>
+                            <th>Téléphone</th>
+                            <td>{{ notaire.telephone }}</td>
+                        </tr>
+                        <tr>
+                            <th>Telecopie</th>
+                            <td>{{ notaire.telecopie }}</td>
+                        </tr>
+                </table>
+                <div>
+                    <a class="btn btn-warning" style="float:left" href="{{path('annuaire_notaire')}}" ><i class="fa fa-arrow-circle-o-left"></i> Retour vers la liste des notaires</a>
+                    {%if notaire.premium==1%}
+                        <a class="btn btn-info" style="float:right"  href="{{path('immo_notaire_annonce',{'id':notaire.id})}}">Voir les annonces du notaire <i class="fa fa-arrow-circle-o-right"></i></a>
+                        {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock%}
